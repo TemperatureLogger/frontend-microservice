@@ -9,4 +9,5 @@ Run project
 -
 
 cd TempLoggerFront
+
 ng serve
