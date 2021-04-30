@@ -1,0 +1,47 @@
+[
+    {
+        "id": 2,
+        "temperature": 31.131231,
+        "humidity": 12.123213
+    },
+    {
+        "id": 3,
+        "temperature": 6.414434,
+        "humidity": 85.91333
+    },
+    {
+        "id": 4,
+        "temperature": 43.423084,
+        "humidity": 48.32475
+    },
+    {
+        "id": 5,
+        "temperature": 29.10341,
+        "humidity": 42.229805
+    },
+    {
+        "id": 6,
+        "temperature": 6.43107,
+        "humidity": 47.013966
+    },
+    {
+        "id": 7,
+        "temperature": 44.08799,
+        "humidity": 61.325447
+    },
+    {
+        "id": 8,
+        "temperature": 40.005714,
+        "humidity": 30.597082
+    },
+    {
+        "id": 9,
+        "temperature": 3.86391,
+        "humidity": 35.519337
+    },
+    {
+        "id": 10,
+        "temperature": 8.707847,
+        "humidity": 72.7399
+    }
+]

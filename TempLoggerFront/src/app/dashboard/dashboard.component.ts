@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
 
+// Import API that communicates with database
+import { ApiService } from '../api.service';
+
+// Import the prototype for environmental data
+import { EnvironmentData } from '../../environmentData';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -38,6 +44,7 @@ export class DashboardComponent implements OnInit {
   public lineChartGradientsNumbersOptions:any;
   public lineChartGradientsNumbersLabels:Array<any>;
   public lineChartGradientsNumbersColors:Array<any>
+  
   // events
   public chartClicked(e:any):void {
     console.log(e);
@@ -46,6 +53,7 @@ export class DashboardComponent implements OnInit {
   public chartHovered(e:any):void {
     console.log(e);
   }
+
   public hexToRGB(hex, alpha) {
     var r = parseInt(hex.slice(1, 3), 16),
       g = parseInt(hex.slice(3, 5), 16),
@@ -57,9 +65,309 @@ export class DashboardComponent implements OnInit {
       return "rgb(" + r + ", " + g + ", " + b + ")";
     }
   }
-  constructor() { }
 
-  ngOnInit() {
+  /* Create variable to reffer API */
+  constructor(private api: ApiService) {}
+
+  /* Create storage for the responce of GET requests */
+  temperature: number[] = [];
+  humidity: number[] = [];
+
+  /* Define method to get data from the database via the API */
+  getAllData() {
+    this.api.getAllData()
+    .subscribe(data => {
+      for (const entry of (data as EnvironmentData[])) {
+        console.log(entry.id);
+        this.temperature.push(entry.temperature);
+        this.humidity.push(entry.humidity);
+      }
+    });
+  }
+
+  /* Define method to get data from the local storage via the API */
+  getLocalData() {
+    this.api.getLocalData()
+      .subscribe(data => {
+        for (const entry of (data as EnvironmentData[])) {
+          console.log(entry.id);
+          this.temperature.push(entry.temperature);
+          this.humidity.push(entry.humidity);
+        }
+      });
+  }
+
+  /* Make default configurations for a graph */
+  ngSetGenericGraphOptions() {
+    this.gradientChartOptionsConfiguration = {
+      maintainAspectRatio: false,
+      legend: {
+        display: false
+      },
+      tooltips: {
+        bodySpacing: 4,
+        mode: "nearest",
+        intersect: 0,
+        position: "nearest",
+        xPadding: 10,
+        yPadding: 10,
+        caretPadding: 10
+      },
+      responsive: 1,
+      scales: {
+        yAxes: [{
+          display: 0,
+          ticks: {
+            display: false
+          },
+          gridLines: {
+            zeroLineColor: "transparent",
+            drawTicks: false,
+            display: false,
+            drawBorder: false
+          }
+        }],
+        xAxes: [{
+          display: 0,
+          ticks: {
+            display: false
+          },
+          gridLines: {
+            zeroLineColor: "transparent",
+            drawTicks: false,
+            display: false,
+            drawBorder: false
+          }
+        }]
+      },
+      layout: {
+        padding: {
+          left: 0,
+          right: 0,
+          top: 15,
+          bottom: 15
+        }
+      }
+    };
+  }
+
+  /* Load the template from the bar graph */
+  ngLoad_Graph() {
+  /* Third graph. */
+      /* TODO: decide which data gets represented here */
+      this.canvas = document.getElementById("barChartSimpleGradientsNumbers");
+      this.ctx = this.canvas.getContext("2d");
+
+      this.gradientFill = this.ctx.createLinearGradient(0, 170, 0, 50);
+      this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
+      this.gradientFill.addColorStop(1, this.hexToRGB('#2CA8FF', 0.6));
+
+
+      this.lineChartGradientsNumbersData = [
+          {
+            label: "Active Countries",
+            pointBorderWidth: 2,
+            pointHoverRadius: 4,
+            pointHoverBorderWidth: 1,
+            pointRadius: 4,
+            fill: true,
+            borderWidth: 1,
+            data: [80, 99, 86, 96, 123, 85, 100, 75, 88, 90, 123, 155]
+          }
+        ];
+      this.lineChartGradientsNumbersColors = [
+      {
+        backgroundColor: this.gradientFill,
+        borderColor: "#2CA8FF",
+        pointBorderColor: "#FFF",
+        pointBackgroundColor: "#2CA8FF",
+      }
+    ];
+      this.lineChartGradientsNumbersLabels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      this.lineChartGradientsNumbersOptions = {
+          maintainAspectRatio: false,
+          legend: {
+            display: false
+          },
+          tooltips: {
+            bodySpacing: 4,
+            mode: "nearest",
+            intersect: 0,
+            position: "nearest",
+            xPadding: 10,
+            yPadding: 10,
+            caretPadding: 10
+          },
+          responsive: 1,
+          scales: {
+            yAxes: [{
+              gridLines: {
+                zeroLineColor: "transparent",
+                drawBorder: false
+              },
+              ticks: {
+                  stepSize: 20
+              }
+            }],
+            xAxes: [{
+              display: 0,
+              ticks: {
+                display: false
+              },
+              gridLines: {
+                zeroLineColor: "transparent",
+                drawTicks: false,
+                display: false,
+                drawBorder: false
+              }
+            }]
+          },
+          layout: {
+            padding: {
+              left: 0,
+              right: 0,
+              top: 15,
+              bottom: 15
+            }
+          }
+        }
+
+      this.lineChartGradientsNumbersType = 'bar';
+  }
+
+  /* Load the template for the hummidity graph */
+  ngLoadHumGraph(dataOx, dataOy) {
+    /* Make configurations */
+    this.gradientChartOptionsConfigurationWithNumbersAndGrid = {
+      maintainAspectRatio: false,
+      legend: {
+        display: false
+      },
+      tooltips: {
+        bodySpacing: 4,
+        mode: "nearest",
+        intersect: 0,
+        position: "nearest",
+        xPadding: 10,
+        yPadding: 10,
+        caretPadding: 10
+      },
+      responsive: true,
+      scales: {
+        yAxes: [{
+          gridLines: {
+            zeroLineColor: "transparent",
+            drawBorder: false
+          },
+          ticks: {
+              stepSize: 10
+          }
+        }],
+        xAxes: [{
+          display: 0,
+          ticks: {
+            display: false
+          },
+          gridLines: {
+            zeroLineColor: "transparent",
+            drawTicks: false,
+            display: false,
+            drawBorder: false
+          }
+        }]
+      },
+      layout: {
+        padding: {
+          left: 0,
+          right: 0,
+          top: 15,
+          bottom: 15
+        }
+      }
+    };
+
+    /* Still doing condigurations */
+    this.canvas = document.getElementById("lineChartExampleWithNumbersAndGrid");
+    this.ctx = this.canvas.getContext("2d");
+
+    this.gradientStroke = this.ctx.createLinearGradient(500, 0, 100, 0);
+    this.gradientStroke.addColorStop(0, '#18ce0f');
+    this.gradientStroke.addColorStop(1, this.chartColor);
+
+    this.gradientFill = this.ctx.createLinearGradient(0, 170, 0, 50);
+    this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
+    this.gradientFill.addColorStop(1, this.hexToRGB('#18ce0f', 0.4));
+
+    /* Graph responsible for Humidity */
+    this.lineChartWithNumbersAndGridData = [
+      {
+        label: "Humidity",
+        pointBorderWidth: 2,
+        pointHoverRadius: 4,
+        pointHoverBorderWidth: 1,
+        pointRadius: 4,
+        fill: true,
+        borderWidth: 2,
+        data: dataOx
+      }
+    ];
+    this.lineChartWithNumbersAndGridColors = [
+    {
+      borderColor: "#18ce0f",
+      pointBorderColor: "#FFF",
+      pointBackgroundColor: "#18ce0f",
+      backgroundColor: this.gradientFill
+    }
+    ];
+    /* TODO add timestamp here */
+    this.lineChartWithNumbersAndGridLabels = dataOy
+    this.lineChartWithNumbersAndGridOptions = this.gradientChartOptionsConfigurationWithNumbersAndGrid;
+
+    this.lineChartWithNumbersAndGridType = 'line';
+  }
+
+  /* Load the template for the temperature graph */
+  ngLoadTempGraph(dataOx, dataOy) {
+    /* Graph responsible for Ilustrating Temperature */
+    this.canvas = document.getElementById("lineChartExample");
+    this.ctx = this.canvas.getContext("2d");
+
+    this.gradientStroke = this.ctx.createLinearGradient(500, 0, 100, 0);
+    this.gradientStroke.addColorStop(0, '#80b6f4');
+    this.gradientStroke.addColorStop(1, this.chartColor);
+
+    this.gradientFill = this.ctx.createLinearGradient(0, 170, 0, 50);
+    this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
+    this.gradientFill.addColorStop(1, "rgba(249, 99, 59, 0.40)");
+
+    this.lineChartData = [
+        {
+          label: "Temperature",
+          pointBorderWidth: 2,
+          pointHoverRadius: 4,
+          pointHoverBorderWidth: 1,
+          pointRadius: 4,
+          fill: true,
+          borderWidth: 2,
+          data: dataOy
+        }
+      ];
+      this.lineChartColors = [
+      {
+        borderColor: "#f96332",
+        pointBorderColor: "#FFF",
+        pointBackgroundColor: "#f96332",
+        backgroundColor: this.gradientFill
+      }
+    ];
+    this.lineChartLabels = dataOx//["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    this.lineChartOptions = this.gradientChartOptionsConfiguration;
+
+    this.lineChartType = 'line';
+  }
+
+  /* Load dashboard graph */
+  ngLoadDashboardGraph(dataOx, dataOy) {
     this.chartColor = "#FFFFFF";
     this.canvas = document.getElementById("bigDashboardChart");
     this.ctx = this.canvas.getContext("2d");
@@ -81,9 +389,9 @@ export class DashboardComponent implements OnInit {
           pointHoverBorderWidth: 2,
           pointRadius: 5,
           fill: true,
-
           borderWidth: 2,
-          data: [50, 150, 100, 190, 130, 90, 150, 160, 120, 140, 190, 95]
+          /* OX for Dashboard graph */
+          data: dataOx
         }
       ];
       this.lineBigDashboardChartColors = [
@@ -96,7 +404,8 @@ export class DashboardComponent implements OnInit {
          pointHoverBorderColor: this.chartColor,
        }
      ];
-    this.lineBigDashboardChartLabels = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+    /* OY data for graph */
+    this.lineBigDashboardChartLabels = dataOy;
     this.lineBigDashboardChartOptions = {
 
           layout: {
@@ -155,261 +464,26 @@ export class DashboardComponent implements OnInit {
               }]
           }
     };
-
     this.lineBigDashboardChartType = 'line';
+  }
 
+  ngOnInit() {
+    /* Try get data for the dashboard table */
+    this.getLocalData();
 
-    this.gradientChartOptionsConfiguration = {
-      maintainAspectRatio: false,
-      legend: {
-        display: false
-      },
-      tooltips: {
-        bodySpacing: 4,
-        mode: "nearest",
-        intersect: 0,
-        position: "nearest",
-        xPadding: 10,
-        yPadding: 10,
-        caretPadding: 10
-      },
-      responsive: 1,
-      scales: {
-        yAxes: [{
-          display: 0,
-          ticks: {
-            display: false
-          },
-          gridLines: {
-            zeroLineColor: "transparent",
-            drawTicks: false,
-            display: false,
-            drawBorder: false
-          }
-        }],
-        xAxes: [{
-          display: 0,
-          ticks: {
-            display: false
-          },
-          gridLines: {
-            zeroLineColor: "transparent",
-            drawTicks: false,
-            display: false,
-            drawBorder: false
-          }
-        }]
-      },
-      layout: {
-        padding: {
-          left: 0,
-          right: 0,
-          top: 15,
-          bottom: 15
-        }
-      }
-    };
+    /* Set generic graph options */
+    this.ngSetGenericGraphOptions();
 
-    this.gradientChartOptionsConfigurationWithNumbersAndGrid = {
-      maintainAspectRatio: false,
-      legend: {
-        display: false
-      },
-      tooltips: {
-        bodySpacing: 4,
-        mode: "nearest",
-        intersect: 0,
-        position: "nearest",
-        xPadding: 10,
-        yPadding: 10,
-        caretPadding: 10
-      },
-      responsive: true,
-      scales: {
-        yAxes: [{
-          gridLines: {
-            zeroLineColor: "transparent",
-            drawBorder: false
-          },
-          ticks: {
-              stepSize: 500
-          }
-        }],
-        xAxes: [{
-          display: 0,
-          ticks: {
-            display: false
-          },
-          gridLines: {
-            zeroLineColor: "transparent",
-            drawTicks: false,
-            display: false,
-            drawBorder: false
-          }
-        }]
-      },
-      layout: {
-        padding: {
-          left: 0,
-          right: 0,
-          top: 15,
-          bottom: 15
-        }
-      }
-    };
+    /* Load dashboard graph */
+    this.ngLoadDashboardGraph(this.temperature, this.humidity);
 
-    this.canvas = document.getElementById("lineChartExample");
-    this.ctx = this.canvas.getContext("2d");
+    /*Load temperature (left) graph */
+    this.ngLoadTempGraph(this.temperature, this.temperature);
 
-    this.gradientStroke = this.ctx.createLinearGradient(500, 0, 100, 0);
-    this.gradientStroke.addColorStop(0, '#80b6f4');
-    this.gradientStroke.addColorStop(1, this.chartColor);
+    /* Load Humidity (middle) graph */
+    this.ngLoadHumGraph(this.humidity, this.humidity);
 
-    this.gradientFill = this.ctx.createLinearGradient(0, 170, 0, 50);
-    this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
-    this.gradientFill.addColorStop(1, "rgba(249, 99, 59, 0.40)");
-
-    this.lineChartData = [
-        {
-          label: "Active Users",
-          pointBorderWidth: 2,
-          pointHoverRadius: 4,
-          pointHoverBorderWidth: 1,
-          pointRadius: 4,
-          fill: true,
-          borderWidth: 2,
-          data: [542, 480, 430, 550, 530, 453, 380, 434, 568, 610, 700, 630]
-        }
-      ];
-      this.lineChartColors = [
-       {
-         borderColor: "#f96332",
-         pointBorderColor: "#FFF",
-         pointBackgroundColor: "#f96332",
-         backgroundColor: this.gradientFill
-       }
-     ];
-    this.lineChartLabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    this.lineChartOptions = this.gradientChartOptionsConfiguration;
-
-    this.lineChartType = 'line';
-
-    this.canvas = document.getElementById("lineChartExampleWithNumbersAndGrid");
-    this.ctx = this.canvas.getContext("2d");
-
-    this.gradientStroke = this.ctx.createLinearGradient(500, 0, 100, 0);
-    this.gradientStroke.addColorStop(0, '#18ce0f');
-    this.gradientStroke.addColorStop(1, this.chartColor);
-
-    this.gradientFill = this.ctx.createLinearGradient(0, 170, 0, 50);
-    this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
-    this.gradientFill.addColorStop(1, this.hexToRGB('#18ce0f', 0.4));
-
-    this.lineChartWithNumbersAndGridData = [
-        {
-          label: "Email Stats",
-           pointBorderWidth: 2,
-           pointHoverRadius: 4,
-           pointHoverBorderWidth: 1,
-           pointRadius: 4,
-           fill: true,
-           borderWidth: 2,
-          data: [40, 500, 650, 700, 1200, 1250, 1300, 1900]
-        }
-      ];
-      this.lineChartWithNumbersAndGridColors = [
-       {
-         borderColor: "#18ce0f",
-         pointBorderColor: "#FFF",
-         pointBackgroundColor: "#18ce0f",
-         backgroundColor: this.gradientFill
-       }
-     ];
-    this.lineChartWithNumbersAndGridLabels = ["12pm,", "3pm", "6pm", "9pm", "12am", "3am", "6am", "9am"];
-    this.lineChartWithNumbersAndGridOptions = this.gradientChartOptionsConfigurationWithNumbersAndGrid;
-
-    this.lineChartWithNumbersAndGridType = 'line';
-
-
-
-
-    this.canvas = document.getElementById("barChartSimpleGradientsNumbers");
-    this.ctx = this.canvas.getContext("2d");
-
-    this.gradientFill = this.ctx.createLinearGradient(0, 170, 0, 50);
-    this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
-    this.gradientFill.addColorStop(1, this.hexToRGB('#2CA8FF', 0.6));
-
-
-    this.lineChartGradientsNumbersData = [
-        {
-          label: "Active Countries",
-          pointBorderWidth: 2,
-          pointHoverRadius: 4,
-          pointHoverBorderWidth: 1,
-          pointRadius: 4,
-          fill: true,
-          borderWidth: 1,
-          data: [80, 99, 86, 96, 123, 85, 100, 75, 88, 90, 123, 155]
-        }
-      ];
-    this.lineChartGradientsNumbersColors = [
-     {
-       backgroundColor: this.gradientFill,
-       borderColor: "#2CA8FF",
-       pointBorderColor: "#FFF",
-       pointBackgroundColor: "#2CA8FF",
-     }
-   ];
-    this.lineChartGradientsNumbersLabels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    this.lineChartGradientsNumbersOptions = {
-        maintainAspectRatio: false,
-        legend: {
-          display: false
-        },
-        tooltips: {
-          bodySpacing: 4,
-          mode: "nearest",
-          intersect: 0,
-          position: "nearest",
-          xPadding: 10,
-          yPadding: 10,
-          caretPadding: 10
-        },
-        responsive: 1,
-        scales: {
-          yAxes: [{
-            gridLines: {
-              zeroLineColor: "transparent",
-              drawBorder: false
-            },
-            ticks: {
-                stepSize: 20
-            }
-          }],
-          xAxes: [{
-            display: 0,
-            ticks: {
-              display: false
-            },
-            gridLines: {
-              zeroLineColor: "transparent",
-              drawTicks: false,
-              display: false,
-              drawBorder: false
-            }
-          }]
-        },
-        layout: {
-          padding: {
-            left: 0,
-            right: 0,
-            top: 15,
-            bottom: 15
-          }
-        }
-      }
-
-    this.lineChartGradientsNumbersType = 'bar';
+    /* Load left graph */
+    this.ngLoad_Graph();
   }
 }
