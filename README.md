@@ -10,4 +10,6 @@ Run project
 
 cd TempLoggerFront
 
+npm install
+
 ng serve
