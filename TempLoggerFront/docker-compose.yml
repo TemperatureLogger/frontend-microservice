@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  frontend-service:
+    build: './'
+    ports:
+      - "4200:80"
+    # environment:
+    #   NODE_ENV: development
+    #   PGHOST: db
+    #   PGUSER: ${PGUSER}
+    #   PGPASSWORD: ${PGPASSWORD}
+    #   PGPORT: 5432
+    #   PGDATABASE: ${PGDATABASE}
+    volumes:
+      - ./:/usr/src/app
+    command: ["npm", "run", "start"]
+    # networks:
+      # - measurements_network

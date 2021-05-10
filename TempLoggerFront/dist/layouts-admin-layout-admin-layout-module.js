@@ -16131,9 +16131,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultColors", function() { return defaultColors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "monkeyPatchChartJsLegend", function() { return monkeyPatchChartJsLegend; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "monkeyPatchChartJsTooltip", function() { return monkeyPatchChartJsTooltip; });
-/* harmony import */ var _home_ghostpants_Documents_Temperature_Logger_frontend_microservice_TempLoggerFront_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/toConsumableArray */ "KQm4");
-/* harmony import */ var _home_ghostpants_Documents_Temperature_Logger_frontend_microservice_TempLoggerFront_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/classCallCheck */ "1OyB");
-/* harmony import */ var _home_ghostpants_Documents_Temperature_Logger_frontend_microservice_TempLoggerFront_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/createClass */ "vuIU");
+/* harmony import */ var _root_TempLogger_frontend_microservice_TempLoggerFront_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/toConsumableArray */ "KQm4");
+/* harmony import */ var _root_TempLogger_frontend_microservice_TempLoggerFront_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/classCallCheck */ "1OyB");
+/* harmony import */ var _root_TempLogger_frontend_microservice_TempLoggerFront_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/createClass */ "vuIU");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "qCKp");
 /* harmony import */ var lodash_es__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lodash-es */ "T89o");
@@ -16389,7 +16389,7 @@ function generateColors(count) {
 
 var ThemeService = /*#__PURE__*/function () {
   function ThemeService() {
-    Object(_home_ghostpants_Documents_Temperature_Logger_frontend_microservice_TempLoggerFront_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__["default"])(this, ThemeService);
+    Object(_root_TempLogger_frontend_microservice_TempLoggerFront_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__["default"])(this, ThemeService);
 
     this.pColorschemesOptions = {};
     this.colorschemesOptions = new rxjs__WEBPACK_IMPORTED_MODULE_4__["BehaviorSubject"]({});
@@ -16400,7 +16400,7 @@ var ThemeService = /*#__PURE__*/function () {
    */
 
 
-  Object(_home_ghostpants_Documents_Temperature_Logger_frontend_microservice_TempLoggerFront_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__["default"])(ThemeService, [{
+  Object(_root_TempLogger_frontend_microservice_TempLoggerFront_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__["default"])(ThemeService, [{
     key: "setColorschemesOptions",
     value: function setColorschemesOptions(options) {
       this.pColorschemesOptions = options;
@@ -16485,7 +16485,7 @@ var BaseChartDirective = /*#__PURE__*/function () {
    * @param {?} themeService
    */
   function BaseChartDirective(element, themeService) {
-    Object(_home_ghostpants_Documents_Temperature_Logger_frontend_microservice_TempLoggerFront_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__["default"])(this, BaseChartDirective);
+    Object(_root_TempLogger_frontend_microservice_TempLoggerFront_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__["default"])(this, BaseChartDirective);
 
     this.element = element;
     this.themeService = themeService;
@@ -16515,7 +16515,7 @@ var BaseChartDirective = /*#__PURE__*/function () {
    */
 
 
-  Object(_home_ghostpants_Documents_Temperature_Logger_frontend_microservice_TempLoggerFront_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__["default"])(BaseChartDirective, [{
+  Object(_root_TempLogger_frontend_microservice_TempLoggerFront_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__["default"])(BaseChartDirective, [{
     key: "ngOnInit",
     value:
     /**
@@ -16721,7 +16721,7 @@ var BaseChartDirective = /*#__PURE__*/function () {
     key: "copyLabel",
     value: function copyLabel(a) {
       if (Array.isArray(a)) {
-        return Object(_home_ghostpants_Documents_Temperature_Logger_frontend_microservice_TempLoggerFront_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(a);
+        return Object(_root_TempLogger_frontend_microservice_TempLoggerFront_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(a);
       }
 
       return a;
@@ -17402,7 +17402,7 @@ if (false) {}
 
 
 var ChartsModule = function ChartsModule() {
-  Object(_home_ghostpants_Documents_Temperature_Logger_frontend_microservice_TempLoggerFront_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__["default"])(this, ChartsModule);
+  Object(_root_TempLogger_frontend_microservice_TempLoggerFront_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__["default"])(this, ChartsModule);
 };
 
 ChartsModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineNgModule"]({
@@ -37624,12 +37624,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _raw_loader_dashboard_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./dashboard.component.html */ "H/d9");
 /* harmony import */ var _dashboard_component_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dashboard.component.css */ "VKVo");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _api_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../api.service */ "yTNM");
 
 
 
+
+// Import API that communicates with database
 
 var DashboardComponent = /** @class */ (function () {
-    function DashboardComponent() {
+    /* Create variable to reffer API */
+    function DashboardComponent(api) {
+        this.api = api;
+        /* Create storage for the responce of GET requests */
+        this.temperature = [];
+        this.humidity = [];
     }
     // events
     DashboardComponent.prototype.chartClicked = function (e) {
@@ -37647,95 +37655,34 @@ var DashboardComponent = /** @class */ (function () {
             return "rgb(" + r + ", " + g + ", " + b + ")";
         }
     };
-    DashboardComponent.prototype.ngOnInit = function () {
-        this.chartColor = "#FFFFFF";
-        this.canvas = document.getElementById("bigDashboardChart");
-        this.ctx = this.canvas.getContext("2d");
-        this.gradientStroke = this.ctx.createLinearGradient(500, 0, 100, 0);
-        this.gradientStroke.addColorStop(0, '#80b6f4');
-        this.gradientStroke.addColorStop(1, this.chartColor);
-        this.gradientFill = this.ctx.createLinearGradient(0, 200, 0, 50);
-        this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
-        this.gradientFill.addColorStop(1, "rgba(255, 255, 255, 0.24)");
-        this.lineBigDashboardChartData = [
-            {
-                label: "Data",
-                pointBorderWidth: 1,
-                pointHoverRadius: 7,
-                pointHoverBorderWidth: 2,
-                pointRadius: 5,
-                fill: true,
-                borderWidth: 2,
-                data: [50, 150, 100, 190, 130, 90, 150, 160, 120, 140, 190, 95]
+    /* Define method to get data from the database via the API */
+    DashboardComponent.prototype.getAllData = function () {
+        var _this = this;
+        this.api.getAllData()
+            .subscribe(function (data) {
+            for (var _i = 0, _a = data; _i < _a.length; _i++) {
+                var entry = _a[_i];
+                console.log(entry.id);
+                _this.temperature.push(entry.temperature);
+                _this.humidity.push(entry.humidity);
             }
-        ];
-        this.lineBigDashboardChartColors = [
-            {
-                backgroundColor: this.gradientFill,
-                borderColor: this.chartColor,
-                pointBorderColor: this.chartColor,
-                pointBackgroundColor: "#2c2c2c",
-                pointHoverBackgroundColor: "#2c2c2c",
-                pointHoverBorderColor: this.chartColor,
+        });
+    };
+    /* Define method to get data from the local storage via the API */
+    DashboardComponent.prototype.getLocalData = function () {
+        var _this = this;
+        this.api.getLocalData()
+            .subscribe(function (data) {
+            for (var _i = 0, _a = data; _i < _a.length; _i++) {
+                var entry = _a[_i];
+                console.log(entry.id);
+                _this.temperature.push(entry.temperature);
+                _this.humidity.push(entry.humidity);
             }
-        ];
-        this.lineBigDashboardChartLabels = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-        this.lineBigDashboardChartOptions = {
-            layout: {
-                padding: {
-                    left: 20,
-                    right: 20,
-                    top: 0,
-                    bottom: 0
-                }
-            },
-            maintainAspectRatio: false,
-            tooltips: {
-                backgroundColor: '#fff',
-                titleFontColor: '#333',
-                bodyFontColor: '#666',
-                bodySpacing: 4,
-                xPadding: 12,
-                mode: "nearest",
-                intersect: 0,
-                position: "nearest"
-            },
-            legend: {
-                position: "bottom",
-                fillStyle: "#FFF",
-                display: false
-            },
-            scales: {
-                yAxes: [{
-                        ticks: {
-                            fontColor: "rgba(255,255,255,0.4)",
-                            fontStyle: "bold",
-                            beginAtZero: true,
-                            maxTicksLimit: 5,
-                            padding: 10
-                        },
-                        gridLines: {
-                            drawTicks: true,
-                            drawBorder: false,
-                            display: true,
-                            color: "rgba(255,255,255,0.1)",
-                            zeroLineColor: "transparent"
-                        }
-                    }],
-                xAxes: [{
-                        gridLines: {
-                            zeroLineColor: "transparent",
-                            display: false,
-                        },
-                        ticks: {
-                            padding: 10,
-                            fontColor: "rgba(255,255,255,0.4)",
-                            fontStyle: "bold"
-                        }
-                    }]
-            }
-        };
-        this.lineBigDashboardChartType = 'line';
+        });
+    };
+    /* Make default configurations for a graph */
+    DashboardComponent.prototype.ngSetGenericGraphOptions = function () {
         this.gradientChartOptionsConfiguration = {
             maintainAspectRatio: false,
             legend: {
@@ -37786,115 +37733,11 @@ var DashboardComponent = /** @class */ (function () {
                 }
             }
         };
-        this.gradientChartOptionsConfigurationWithNumbersAndGrid = {
-            maintainAspectRatio: false,
-            legend: {
-                display: false
-            },
-            tooltips: {
-                bodySpacing: 4,
-                mode: "nearest",
-                intersect: 0,
-                position: "nearest",
-                xPadding: 10,
-                yPadding: 10,
-                caretPadding: 10
-            },
-            responsive: true,
-            scales: {
-                yAxes: [{
-                        gridLines: {
-                            zeroLineColor: "transparent",
-                            drawBorder: false
-                        },
-                        ticks: {
-                            stepSize: 500
-                        }
-                    }],
-                xAxes: [{
-                        display: 0,
-                        ticks: {
-                            display: false
-                        },
-                        gridLines: {
-                            zeroLineColor: "transparent",
-                            drawTicks: false,
-                            display: false,
-                            drawBorder: false
-                        }
-                    }]
-            },
-            layout: {
-                padding: {
-                    left: 0,
-                    right: 0,
-                    top: 15,
-                    bottom: 15
-                }
-            }
-        };
-        this.canvas = document.getElementById("lineChartExample");
-        this.ctx = this.canvas.getContext("2d");
-        this.gradientStroke = this.ctx.createLinearGradient(500, 0, 100, 0);
-        this.gradientStroke.addColorStop(0, '#80b6f4');
-        this.gradientStroke.addColorStop(1, this.chartColor);
-        this.gradientFill = this.ctx.createLinearGradient(0, 170, 0, 50);
-        this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
-        this.gradientFill.addColorStop(1, "rgba(249, 99, 59, 0.40)");
-        this.lineChartData = [
-            {
-                label: "Active Users",
-                pointBorderWidth: 2,
-                pointHoverRadius: 4,
-                pointHoverBorderWidth: 1,
-                pointRadius: 4,
-                fill: true,
-                borderWidth: 2,
-                data: [542, 480, 430, 550, 530, 453, 380, 434, 568, 610, 700, 630]
-            }
-        ];
-        this.lineChartColors = [
-            {
-                borderColor: "#f96332",
-                pointBorderColor: "#FFF",
-                pointBackgroundColor: "#f96332",
-                backgroundColor: this.gradientFill
-            }
-        ];
-        this.lineChartLabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        this.lineChartOptions = this.gradientChartOptionsConfiguration;
-        this.lineChartType = 'line';
-        this.canvas = document.getElementById("lineChartExampleWithNumbersAndGrid");
-        this.ctx = this.canvas.getContext("2d");
-        this.gradientStroke = this.ctx.createLinearGradient(500, 0, 100, 0);
-        this.gradientStroke.addColorStop(0, '#18ce0f');
-        this.gradientStroke.addColorStop(1, this.chartColor);
-        this.gradientFill = this.ctx.createLinearGradient(0, 170, 0, 50);
-        this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
-        this.gradientFill.addColorStop(1, this.hexToRGB('#18ce0f', 0.4));
-        this.lineChartWithNumbersAndGridData = [
-            {
-                label: "Email Stats",
-                pointBorderWidth: 2,
-                pointHoverRadius: 4,
-                pointHoverBorderWidth: 1,
-                pointRadius: 4,
-                fill: true,
-                borderWidth: 2,
-                data: [40, 500, 650, 700, 1200, 1250, 1300, 1900]
-            }
-        ];
-        this.lineChartWithNumbersAndGridColors = [
-            {
-                borderColor: "#18ce0f",
-                pointBorderColor: "#FFF",
-                pointBackgroundColor: "#18ce0f",
-                backgroundColor: this.gradientFill
-            }
-        ];
-        this.lineChartWithNumbersAndGridLabels = ["12pm,", "3pm", "6pm", "9pm", "12am", "3am", "6am", "9am"];
-        this.lineChartWithNumbersAndGridOptions = this.gradientChartOptionsConfigurationWithNumbersAndGrid;
-        this.lineChartWithNumbersAndGridType = 'line';
+    };
+    /* Load the template from the bar graph */
+    DashboardComponent.prototype.ngLoad_Graph = function () {
+        /* Third graph. */
+        /* TODO: decide which data gets represented here */
         this.canvas = document.getElementById("barChartSimpleGradientsNumbers");
         this.ctx = this.canvas.getContext("2d");
         this.gradientFill = this.ctx.createLinearGradient(0, 170, 0, 50);
@@ -37970,14 +37813,243 @@ var DashboardComponent = /** @class */ (function () {
         };
         this.lineChartGradientsNumbersType = 'bar';
     };
-    DashboardComponent.ctorParameters = function () { return []; };
+    /* Load the template for the hummidity graph */
+    DashboardComponent.prototype.ngLoadHumGraph = function (dataOx, dataOy) {
+        /* Make configurations */
+        this.gradientChartOptionsConfigurationWithNumbersAndGrid = {
+            maintainAspectRatio: false,
+            legend: {
+                display: false
+            },
+            tooltips: {
+                bodySpacing: 4,
+                mode: "nearest",
+                intersect: 0,
+                position: "nearest",
+                xPadding: 10,
+                yPadding: 10,
+                caretPadding: 10
+            },
+            responsive: true,
+            scales: {
+                yAxes: [{
+                        gridLines: {
+                            zeroLineColor: "transparent",
+                            drawBorder: false
+                        },
+                        ticks: {
+                            stepSize: 10
+                        }
+                    }],
+                xAxes: [{
+                        display: 0,
+                        ticks: {
+                            display: false
+                        },
+                        gridLines: {
+                            zeroLineColor: "transparent",
+                            drawTicks: false,
+                            display: false,
+                            drawBorder: false
+                        }
+                    }]
+            },
+            layout: {
+                padding: {
+                    left: 0,
+                    right: 0,
+                    top: 15,
+                    bottom: 15
+                }
+            }
+        };
+        /* Still doing condigurations */
+        this.canvas = document.getElementById("lineChartExampleWithNumbersAndGrid");
+        this.ctx = this.canvas.getContext("2d");
+        this.gradientStroke = this.ctx.createLinearGradient(500, 0, 100, 0);
+        this.gradientStroke.addColorStop(0, '#18ce0f');
+        this.gradientStroke.addColorStop(1, this.chartColor);
+        this.gradientFill = this.ctx.createLinearGradient(0, 170, 0, 50);
+        this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
+        this.gradientFill.addColorStop(1, this.hexToRGB('#18ce0f', 0.4));
+        /* Graph responsible for Humidity */
+        this.lineChartWithNumbersAndGridData = [
+            {
+                label: "Humidity",
+                pointBorderWidth: 2,
+                pointHoverRadius: 4,
+                pointHoverBorderWidth: 1,
+                pointRadius: 4,
+                fill: true,
+                borderWidth: 2,
+                data: dataOx
+            }
+        ];
+        this.lineChartWithNumbersAndGridColors = [
+            {
+                borderColor: "#18ce0f",
+                pointBorderColor: "#FFF",
+                pointBackgroundColor: "#18ce0f",
+                backgroundColor: this.gradientFill
+            }
+        ];
+        /* TODO add timestamp here */
+        this.lineChartWithNumbersAndGridLabels = dataOy;
+        this.lineChartWithNumbersAndGridOptions = this.gradientChartOptionsConfigurationWithNumbersAndGrid;
+        this.lineChartWithNumbersAndGridType = 'line';
+    };
+    /* Load the template for the temperature graph */
+    DashboardComponent.prototype.ngLoadTempGraph = function (dataOx, dataOy) {
+        /* Graph responsible for Ilustrating Temperature */
+        this.canvas = document.getElementById("lineChartExample");
+        this.ctx = this.canvas.getContext("2d");
+        this.gradientStroke = this.ctx.createLinearGradient(500, 0, 100, 0);
+        this.gradientStroke.addColorStop(0, '#80b6f4');
+        this.gradientStroke.addColorStop(1, this.chartColor);
+        this.gradientFill = this.ctx.createLinearGradient(0, 170, 0, 50);
+        this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
+        this.gradientFill.addColorStop(1, "rgba(249, 99, 59, 0.40)");
+        this.lineChartData = [
+            {
+                label: "Temperature",
+                pointBorderWidth: 2,
+                pointHoverRadius: 4,
+                pointHoverBorderWidth: 1,
+                pointRadius: 4,
+                fill: true,
+                borderWidth: 2,
+                data: dataOy
+            }
+        ];
+        this.lineChartColors = [
+            {
+                borderColor: "#f96332",
+                pointBorderColor: "#FFF",
+                pointBackgroundColor: "#f96332",
+                backgroundColor: this.gradientFill
+            }
+        ];
+        this.lineChartLabels = dataOx; //["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        this.lineChartOptions = this.gradientChartOptionsConfiguration;
+        this.lineChartType = 'line';
+    };
+    /* Load dashboard graph */
+    DashboardComponent.prototype.ngLoadDashboardGraph = function (dataOx, dataOy) {
+        this.chartColor = "#FFFFFF";
+        this.canvas = document.getElementById("bigDashboardChart");
+        this.ctx = this.canvas.getContext("2d");
+        this.gradientStroke = this.ctx.createLinearGradient(500, 0, 100, 0);
+        this.gradientStroke.addColorStop(0, '#80b6f4');
+        this.gradientStroke.addColorStop(1, this.chartColor);
+        this.gradientFill = this.ctx.createLinearGradient(0, 200, 0, 50);
+        this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
+        this.gradientFill.addColorStop(1, "rgba(255, 255, 255, 0.24)");
+        this.lineBigDashboardChartData = [
+            {
+                label: "Data",
+                pointBorderWidth: 1,
+                pointHoverRadius: 7,
+                pointHoverBorderWidth: 2,
+                pointRadius: 5,
+                fill: true,
+                borderWidth: 2,
+                /* OX for Dashboard graph */
+                data: dataOx
+            }
+        ];
+        this.lineBigDashboardChartColors = [
+            {
+                backgroundColor: this.gradientFill,
+                borderColor: this.chartColor,
+                pointBorderColor: this.chartColor,
+                pointBackgroundColor: "#2c2c2c",
+                pointHoverBackgroundColor: "#2c2c2c",
+                pointHoverBorderColor: this.chartColor,
+            }
+        ];
+        /* OY data for graph */
+        this.lineBigDashboardChartLabels = dataOy;
+        this.lineBigDashboardChartOptions = {
+            layout: {
+                padding: {
+                    left: 20,
+                    right: 20,
+                    top: 0,
+                    bottom: 0
+                }
+            },
+            maintainAspectRatio: false,
+            tooltips: {
+                backgroundColor: '#fff',
+                titleFontColor: '#333',
+                bodyFontColor: '#666',
+                bodySpacing: 4,
+                xPadding: 12,
+                mode: "nearest",
+                intersect: 0,
+                position: "nearest"
+            },
+            legend: {
+                position: "bottom",
+                fillStyle: "#FFF",
+                display: false
+            },
+            scales: {
+                yAxes: [{
+                        ticks: {
+                            fontColor: "rgba(255,255,255,0.4)",
+                            fontStyle: "bold",
+                            beginAtZero: true,
+                            maxTicksLimit: 5,
+                            padding: 10
+                        },
+                        gridLines: {
+                            drawTicks: true,
+                            drawBorder: false,
+                            display: true,
+                            color: "rgba(255,255,255,0.1)",
+                            zeroLineColor: "transparent"
+                        }
+                    }],
+                xAxes: [{
+                        gridLines: {
+                            zeroLineColor: "transparent",
+                            display: false,
+                        },
+                        ticks: {
+                            padding: 10,
+                            fontColor: "rgba(255,255,255,0.4)",
+                            fontStyle: "bold"
+                        }
+                    }]
+            }
+        };
+        this.lineBigDashboardChartType = 'line';
+    };
+    DashboardComponent.prototype.ngOnInit = function () {
+        /* Try get data for the dashboard table */
+        this.getLocalData();
+        /* Set generic graph options */
+        this.ngSetGenericGraphOptions();
+        /* Load dashboard graph */
+        this.ngLoadDashboardGraph(this.temperature, this.humidity);
+        /*Load temperature (left) graph */
+        this.ngLoadTempGraph(this.temperature, this.temperature);
+        /* Load Humidity (middle) graph */
+        this.ngLoadHumGraph(this.humidity, this.humidity);
+        /* Load left graph */
+        this.ngLoad_Graph();
+    };
+    DashboardComponent.ctorParameters = function () { return [
+        { type: _api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"] }
+    ]; };
     DashboardComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
             selector: 'app-dashboard',
             template: _raw_loader_dashboard_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
             styles: [_dashboard_component_css__WEBPACK_IMPORTED_MODULE_2__["default"]]
         }),
-        Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [])
+        Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"]])
     ], DashboardComponent);
     return DashboardComponent;
 }());
@@ -70648,6 +70720,59 @@ function isNumber(value) {
   });
   return sq;
 });
+
+/***/ }),
+
+/***/ "yTNM":
+/*!********************************!*\
+  !*** ./src/app/api.service.ts ***!
+  \********************************/
+/*! exports provided: ApiService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ApiService", function() { return ApiService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
+
+
+
+var dataBaseUrlAll = 'http://157.245.65.94:3000/api/measurements';
+var dataBaseUrlId = '';
+var localDataURL = './assets/data/data_format.json';
+var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]()
+    .set('Access-Control-Allow-Origin', '*');
+var ApiService = /** @class */ (function () {
+    function ApiService(http) {
+        this.http = http;
+    }
+    /* Get add data from the database */
+    ApiService.prototype.getAllData = function () {
+        return this.http.get(dataBaseUrlAll, { 'headers': headers });
+    };
+    /* Get entry by ID from database */
+    ApiService.prototype.getDataById = function () {
+        return this.http.get(dataBaseUrlId);
+    };
+    /* Get local data */
+    ApiService.prototype.getLocalData = function () {
+        return this.http.get(localDataURL);
+    };
+    ApiService.ctorParameters = function () { return [
+        { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
+    ]; };
+    ApiService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        }),
+        Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
+    ], ApiService);
+    return ApiService;
+}());
+
+
 
 /***/ }),
 

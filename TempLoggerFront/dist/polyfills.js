@@ -4315,8 +4315,8 @@ $({ target: 'Reflect', stat: true, sham: !FREEZING }, {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/ghostpants/Documents/Temperature_Logger/frontend-microservice/TempLoggerFront/src/polyfills.ts */"hN/g");
-module.exports = __webpack_require__(/*! /home/ghostpants/Documents/Temperature_Logger/frontend-microservice/TempLoggerFront/node_modules/@angular-devkit/build-angular/src/webpack/jit-polyfills.js */"rZy+");
+__webpack_require__(/*! /root/TempLogger/frontend-microservice/TempLoggerFront/src/polyfills.ts */"hN/g");
+module.exports = __webpack_require__(/*! /root/TempLogger/frontend-microservice/TempLoggerFront/node_modules/@angular-devkit/build-angular/src/webpack/jit-polyfills.js */"rZy+");
 
 
 /***/ }),

@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/ghostpants/Documents/Temperature_Logger/frontend-microservice/TempLoggerFront/src/main.ts */"zUnb");
+module.exports = __webpack_require__(/*! /root/TempLogger/frontend-microservice/TempLoggerFront/src/main.ts */"zUnb");
 
 
 /***/ }),
@@ -107,7 +107,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n<div class=\"logo\">\n    <a href=\"https://www.creative-tim.com\" class=\"simple-text logo-mini\">\n      <div class=\"logo-img\">\n          <img src=\"./assets/img/angular2-logo-white.png\"/>\n      </div>\n    </a>\n    <a href=\"https://www.creative-tim.com\" class=\"simple-text logo-normal\">\n        Creative Tim\n    </a>\n</div>\n<div class=\"sidebar-wrapper\">\n    <ul class=\"nav\">\n        <li routerLinkActive=\"active\" *ngFor=\"let menuItem of menuItems\" class=\"{{menuItem.class}} nav-item\">\n            <a [routerLink]=\"[menuItem.path]\">\n                <i class=\"now-ui-icons {{menuItem.icon}}\"></i>\n                <p>{{menuItem.title}}</p>\n            </a>\n        </li>\n    </ul>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("\n<div class=\"logo\">\n    <a href=\"https://www.creative-tim.com\" class=\"simple-text logo-mini\">\n      <div class=\"logo-img\">\n          <img src=\"./assets/img/angular2-logo-white.png\"/>\n      </div>\n    </a>\n    <a href=\"https://www.creative-tim.com\" class=\"simple-text logo-normal\">\n        Temperature Logger\n    </a>\n</div>\n<div class=\"sidebar-wrapper\">\n    <ul class=\"nav\">\n        <li routerLinkActive=\"active\" *ngFor=\"let menuItem of menuItems\" class=\"{{menuItem.class}} nav-item\">\n            <a [routerLink]=\"[menuItem.path]\">\n                <i class=\"now-ui-icons {{menuItem.icon}}\"></i>\n                <p>{{menuItem.title}}</p>\n            </a>\n        </li>\n    </ul>\n</div>\n");
 
 /***/ }),
 
@@ -352,18 +352,19 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppModule", function() { return AppModule; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
-/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser/animations */ "R1ws");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "1kSV");
-/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ngx-toastr */ "5eHb");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "1kSV");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ngx-toastr */ "5eHb");
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/platform-browser */ "jhN1");
 /* harmony import */ var _app_routing__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app.routing */ "beVS");
 /* harmony import */ var _components_components_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/components.module */ "j1ZV");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./app.component */ "Sy1n");
 /* harmony import */ var _layouts_admin_layout_admin_layout_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./layouts/admin-layout/admin-layout.component */ "P6kD");
 
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -379,16 +380,17 @@ var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             imports: [
-                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_1__["BrowserAnimationsModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
-                _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"],
+                _angular_platform_browser__WEBPACK_IMPORTED_MODULE_7__["BrowserModule"],
+                // BrowserAnimationsModule,
+                _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"],
                 _components_components_module__WEBPACK_IMPORTED_MODULE_9__["ComponentsModule"],
-                _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"],
+                _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"],
                 _app_routing__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"],
-                _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_6__["NgbModule"],
-                ngx_toastr__WEBPACK_IMPORTED_MODULE_7__["ToastrModule"].forRoot()
+                _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_5__["NgbModule"],
+                ngx_toastr__WEBPACK_IMPORTED_MODULE_6__["ToastrModule"].forRoot()
             ],
             declarations: [
                 _app_component__WEBPACK_IMPORTED_MODULE_10__["AppComponent"],
@@ -762,13 +764,13 @@ __webpack_require__.r(__webpack_exports__);
 
 var ROUTES = [
     { path: '/dashboard', title: 'Dashboard', icon: 'design_app', class: '' },
-    { path: '/icons', title: 'Icons', icon: 'education_atom', class: '' },
-    { path: '/maps', title: 'Maps', icon: 'location_map-big', class: '' },
-    { path: '/notifications', title: 'Notifications', icon: 'ui-1_bell-53', class: '' },
-    { path: '/user-profile', title: 'User Profile', icon: 'users_single-02', class: '' },
-    { path: '/table-list', title: 'Table List', icon: 'design_bullet-list-67', class: '' },
-    { path: '/typography', title: 'Typography', icon: 'text_caps-small', class: '' },
-    { path: '/upgrade', title: 'Upgrade to PRO', icon: 'objects_spaceship', class: 'active active-pro' }
+    // { path: '/icons', title: 'Icons',  icon:'education_atom', class: '' },
+    // { path: '/maps', title: 'Maps',  icon:'location_map-big', class: '' },
+    // { path: '/notifications', title: 'Notifications',  icon:'ui-1_bell-53', class: '' },
+    { path: '/user-profile', title: 'User Profile', icon: 'users_single-02', class: '' }
+    // { path: '/table-list', title: 'Table List',  icon:'design_bullet-list-67', class: '' },
+    // { path: '/typography', title: 'Typography',  icon:'text_caps-small', class: '' },
+    // { path: '/upgrade', title: 'Upgrade to PRO',  icon:'objects_spaceship', class: 'active active-pro' }
 ];
 var SidebarComponent = /** @class */ (function () {
     function SidebarComponent() {

@@ -78,7 +78,7 @@ export class DashboardComponent implements OnInit {
     this.api.getAllData()
     .subscribe(data => {
       for (const entry of (data as EnvironmentData[])) {
-        console.log(entry.id);
+        // console.log(entry.id);
         this.temperature.push(entry.temperature);
         this.humidity.push(entry.humidity);
       }
@@ -90,7 +90,7 @@ export class DashboardComponent implements OnInit {
     this.api.getLocalData()
       .subscribe(data => {
         for (const entry of (data as EnvironmentData[])) {
-          console.log(entry.id);
+          // console.log(entry.id);
           this.temperature.push(entry.temperature);
           this.humidity.push(entry.humidity);
         }
@@ -469,7 +469,11 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     /* Try get data for the dashboard table */
+    console.log("Getting data...");
     this.getLocalData();
+    // this.getAllData();
+    console.log(this.temperature);
+    console.log("Got data.");
 
     /* Set generic graph options */
     this.ngSetGenericGraphOptions();

@@ -6,8 +6,6 @@ const dataBaseUrlAll = 'http://157.245.65.94:3000/api/measurements';
 const dataBaseUrlId = '';
 const localDataURL = './assets/data/data_format.json';
 
-const headers= new HttpHeaders()
-  .set('Access-Control-Allow-Origin', '*');
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +16,7 @@ export class ApiService {
 
   /* Get add data from the database */
   getAllData() {
-    return this.http.get(dataBaseUrlAll, { 'headers': headers });
+    return this.http.get(dataBaseUrlAll);
   }
 
   /* Get entry by ID from database */
