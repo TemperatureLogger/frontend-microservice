@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
-
+import * as $ from "jquery";
 // Import API that communicates with database
 import { ApiService } from '../api.service';
 
 // Import the prototype for environmental data
 import { EnvironmentData } from '../../environmentData';
+//import { timeStamp } from 'console';
 
 @Component({
   selector: 'app-dashboard',
@@ -72,7 +73,10 @@ export class DashboardComponent implements OnInit {
   /* Create storage for the responce of GET requests */
   temperature: number[] = [];
   humidity: number[] = [];
-
+  temperatures: number[] = [38.71, 26.5, 1.45, 3.76, 41.3, 17.42, 14.77, 21.85, 29.06, 27.84, 35.95, 29.11, 24.74, 47.06, 6.17, 21.03, 36.69, 38.71, 8.48, 7.78];
+  humidities: number[] = [95.58, 69.98, 87.62, 29.8, 87.83, 36.84, 84.86, 82.74, 58.31, 40.0, 52.11, 89.08, 35.1, 59.02, 80.34, 97.4, 58.9, 20.87, 88.44, 95.28];  
+  timestamps : number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 , 20, 21]
+  tstamps : number[] = this.timestamps;
   /* Define method to get data from the database via the API */
   getAllData() {
     this.api.getAllData()
@@ -308,7 +312,7 @@ export class DashboardComponent implements OnInit {
         pointRadius: 4,
         fill: true,
         borderWidth: 2,
-        data: dataOx
+        data: dataOy
       }
     ];
     this.lineChartWithNumbersAndGridColors = [
@@ -467,12 +471,41 @@ export class DashboardComponent implements OnInit {
     this.lineBigDashboardChartType = 'line';
   }
 
+  displayMonth() {
+    let n = this.temperatures.length;
+    this.temperatures = this.temperatures.slice(n - 10, n);
+    this.timestamps = this.timestamps.slice(n - 10, n);
+  }
+
+  onTempChange(value:string) {
+    let n = this.temperatures.length
+    let m = this.timestamps.length
+    if (value == "Last Month") {
+      this.temperature = this.temperatures.slice(n - 10, n);
+      this.tstamps = this.timestamps.slice(m - 10, m);
+      this.ngLoadTempGraph(this.tstamps, this.temperature);
+    } else if (value == "Last Week") {
+      this.temperature = this.temperatures.slice(n - 4, n);
+      this.tstamps = this.timestamps.slice(m - 4, m);
+      this.ngLoadTempGraph(this.tstamps, this.temperature);
+    } else if (value == "Today") {
+      this.temperature = this.temperatures.slice(n - 2, n);
+      this.tstamps = this.timestamps.slice(m - 2, m);
+      this.ngLoadTempGraph(this.tstamps, this.temperature);
+    } 
+    else {
+      this.temperature = this.temperatures
+      this.tstamps = this.timestamps;
+      this.ngLoadTempGraph(this.tstamps, this.temperature);
+  }}
+
   ngOnInit() {
+
     /* Try get data for the dashboard table */
+    this.temperature = this.temperatures
     console.log("Getting data...");
     this.getLocalData();
     // this.getAllData();
-    console.log(this.temperature);
     console.log("Got data.");
 
     /* Set generic graph options */
@@ -482,12 +515,14 @@ export class DashboardComponent implements OnInit {
     this.ngLoadDashboardGraph(this.temperature, this.humidity);
 
     /*Load temperature (left) graph */
-    this.ngLoadTempGraph(this.temperature, this.temperature);
+    this.ngLoadTempGraph(this.tstamps, this.temperature);
 
     /* Load Humidity (middle) graph */
-    this.ngLoadHumGraph(this.humidity, this.humidity);
+    this.ngLoadHumGraph(this.timestamps, this.humidities);
 
     /* Load left graph */
     this.ngLoad_Graph();
   }
+  
+
 }
