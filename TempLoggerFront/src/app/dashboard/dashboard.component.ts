@@ -325,8 +325,7 @@ export class DashboardComponent implements OnInit {
     }
     ];
     /* TODO add timestamp here */
-    this.lineChartLabels = dataOx
-    this.lineChartWithNumbersAndGridLabels = dataOy
+    this.lineChartWithNumbersAndGridLabels = dataOx
     this.lineChartWithNumbersAndGridOptions = this.gradientChartOptionsConfigurationWithNumbersAndGrid;
 
     this.lineChartWithNumbersAndGridType = 'line';
