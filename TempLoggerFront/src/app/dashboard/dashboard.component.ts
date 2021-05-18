@@ -77,6 +77,7 @@ export class DashboardComponent implements OnInit {
   humidities: number[] = [95.58, 69.98, 87.62, 29.8, 87.83, 36.84, 84.86, 82.74, 58.31, 40.0, 52.11, 89.08, 35.1, 59.02, 80.34, 97.4, 58.9, 20.87, 88.44, 95.28];  
   timestamps : number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 , 20, 21]
   tstamps : number[] = this.timestamps;
+  humTstamps : number[] = this.timestamps;
   /* Define method to get data from the database via the API */
   getAllData() {
     this.api.getAllData()
@@ -324,6 +325,7 @@ export class DashboardComponent implements OnInit {
     }
     ];
     /* TODO add timestamp here */
+    this.lineChartLabels = dataOx
     this.lineChartWithNumbersAndGridLabels = dataOy
     this.lineChartWithNumbersAndGridOptions = this.gradientChartOptionsConfigurationWithNumbersAndGrid;
 
@@ -478,8 +480,8 @@ export class DashboardComponent implements OnInit {
   }
 
   onTempChange(value:string) {
-    let n = this.temperatures.length
-    let m = this.timestamps.length
+    let n = this.temperatures.length;
+    let m = this.timestamps.length;
     if (value == "Last Month") {
       this.temperature = this.temperatures.slice(n - 10, n);
       this.tstamps = this.timestamps.slice(m - 10, m);
@@ -494,9 +496,31 @@ export class DashboardComponent implements OnInit {
       this.ngLoadTempGraph(this.tstamps, this.temperature);
     } 
     else {
-      this.temperature = this.temperatures
+      this.temperature = this.temperatures;
       this.tstamps = this.timestamps;
       this.ngLoadTempGraph(this.tstamps, this.temperature);
+  }}
+
+  onHumChange(value:string) {
+    let n = this.humidities.length;
+    let m = this.timestamps.length;
+    if (value == "Last Month") {
+      this.humidity = this.humidities.slice(n - 10, n);
+      this.humTstamps = this.timestamps.slice(m - 10, m);
+      this.ngLoadHumGraph(this.humTstamps, this.humidity);
+    } else if (value == "Last Week") {
+      this.humidity = this.humidities.slice(n - 4, n);
+      this.humTstamps = this.timestamps.slice(m - 4, m);
+      this.ngLoadHumGraph(this.humTstamps, this.humidity);
+    } else if (value == "Today") {
+      this.humidity = this.humidities.slice(n - 2, n);
+      this.humTstamps = this.timestamps.slice(m - 2, m);
+      this.ngLoadHumGraph(this.humTstamps, this.humidity);
+    } 
+    else {
+      this.humidity = this.humidities;
+      this.humTstamps = this.timestamps;
+      this.ngLoadHumGraph(this.humTstamps, this.humidity);
   }}
 
   ngOnInit() {
@@ -518,7 +542,7 @@ export class DashboardComponent implements OnInit {
     this.ngLoadTempGraph(this.tstamps, this.temperature);
 
     /* Load Humidity (middle) graph */
-    this.ngLoadHumGraph(this.timestamps, this.humidities);
+    this.ngLoadHumGraph(this.humTstamps, this.humidities);
 
     /* Load left graph */
     this.ngLoad_Graph();

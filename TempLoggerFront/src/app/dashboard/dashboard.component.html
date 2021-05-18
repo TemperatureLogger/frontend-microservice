@@ -14,12 +14,12 @@
     <div class="col-lg-4">
       <div class="card card-chart">
         <div class="card-header">
-          <h5 class="card-category">Sensor Metrics</h5>
+          <h5 class="card-category">Temp Sensor Metrics</h5>
           <h4 class="card-title">Temperature</h4>
           <div ngbDropdown>
             <select id="temp-dropdown"
-              #mySelect
-              (change)='onTempChange(mySelect.value)'>
+              #myTempSelect
+              (change)='onTempChange(myTempSelect.value)'>
               <option class="dropdown-item" href="#">All Data</option>
               <option class="dropdown-item" href="#">Last Month</option>
               <option class="dropdown-item" href="#">Last Week</option>
@@ -49,12 +49,12 @@
     <div class="col-lg-4 col-md-6">
       <div class="card card-chart">
         <div class="card-header">
-          <h5 class="card-category">Sensor Metrics</h5>
+          <h5 class="card-category">Humidity Sensor Metrics</h5>
           <h4 class="card-title">Humidity</h4>
           <div ngbDropdown>
-            <select  class="dropdown-menu-right" id="hum-dropdown"
-              #mySelect
-              (change)='onOptionChange(mySelect.value)'>
+            <select id="hum-dropdown"
+              #myHumSelect
+              (change)='onHumChange(myHumSelect.value)'>
               <option class="dropdown-item" href="#">All Data</option>
               <option class="dropdown-item" href="#">Last Month</option>
               <option class="dropdown-item" href="#">Last Week</option>
