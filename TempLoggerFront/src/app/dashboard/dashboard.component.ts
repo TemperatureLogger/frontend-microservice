@@ -498,7 +498,8 @@ export class DashboardComponent implements OnInit {
       this.temperature = this.temperatures;
       this.tstamps = this.timestamps;
       this.ngLoadTempGraph(this.tstamps, this.temperature);
-  }}
+    }
+  }
 
   onHumChange(value:string) {
     let n = this.humidities.length;
