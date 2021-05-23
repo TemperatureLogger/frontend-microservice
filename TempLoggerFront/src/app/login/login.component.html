@@ -1,4 +1,4 @@
-<style>
+<!-- <style>
 .central {
     margin: 0;
     position: absolute;
@@ -13,13 +13,13 @@ input {
 button {
   left: 50%;
 }
-</style>
+</style> -->
 
-<html>
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<!-- <html>
+  <link rel="login.component" href="login.component.css">
   <div class="page">
     <div class = "central">
-      <form #f="ngForm" method="post" ngNativeValidate>
         <div class="row d-flex justify-content-center align-items-center">
               <div class="form-group">
                 <label for="uname"><b>Username </b></label>
@@ -43,6 +43,39 @@ button {
       </form>
     </div>
   </div>
-</html> 
+</html>  -->
 
 
+<form #f="ngForm" method="post" ngNativeValidate>
+
+<!-- <button type="submit" class="btn btn-primary" id="login_btn"
+#loginBtn
+(click)='loginUser()'>Login</button> -->
+
+<div class="container" id="container">
+	<div class="form-container sign-in-container">
+		<form action="#">
+			<h1>Sign in</h1>
+			<span>Use your account</span>
+			<input type="text" placeholder="Email" id="nameText" required />
+			<input type="password"  placeholder="Password" id="passText" required/>
+			<button (click)='loginUser()'>Sign In</button>
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>Welcome Back!</h1>
+				<p>To keep connected with us please login with your personal info</p>
+				<button class="ghost" id="signIn">Sign In</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>New here? Join us!</h1>
+				<p>Enter your personal details and start journey with us</p>
+				<button (click)='redirectRegister()' class="ghost" id="signUp">Sign Up!!</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+</form>

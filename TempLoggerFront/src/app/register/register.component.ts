@@ -17,9 +17,9 @@ export class RegisterComponent implements OnInit {
   }
 
   registerUser(): void {
-    let nameText = document.getElementById('nameText').value;
-    let passText = document.getElementById('passText').value;
-    let confirmPassText = document.getElementById('confirmPassText').value;
+    let nameText = (<HTMLInputElement>document.getElementById('nameText')).value;//document.getElementById('nameText').value;
+    let passText = (<HTMLInputElement>document.getElementById('passText')).value;//document.getElementById('passText').value;
+    let confirmPassText =  (<HTMLInputElement>document.getElementById('confirmPassText')).value;
     // TODO Change userDB with get call from user DB
     if (nameText != null 
         && passText === confirmPassText
@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
           }
           // TODO Change push with 
           userDB.push({"name": nameText, "pass": passText});
-          window.alert("User registered with success.");  
+          window.alert("User registered with success."); 
       }
       
   }

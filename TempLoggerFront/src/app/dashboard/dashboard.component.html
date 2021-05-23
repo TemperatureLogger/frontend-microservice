@@ -39,11 +39,11 @@
                         (chartClick)="chartClicked($event)"></canvas>
           </div>
         </div>
-        <div class="card-footer">
+        <!-- <div class="card-footer">
           <div class="stats">
             <i class="now-ui-icons arrows-1_refresh-69"></i> Just Updated
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="col-lg-4 col-md-6">
@@ -75,11 +75,11 @@
                         (chartClick)="chartClicked($event)"></canvas>
           </div>
         </div>
-        <div class="card-footer">
+        <!-- <div class="card-footer">
           <div class="stats">
             <i class="now-ui-icons arrows-1_refresh-69"></i> Just Updated
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="col-lg-4 col-md-6">
@@ -87,6 +87,16 @@
         <div class="card-header">
           <h5 class="card-category">Statistics</h5>
           <h4 class="card-title">Timestamps</h4>
+          <div ngbDropdown>
+            <select id="temp-dropdown"
+              #myTempSelect
+              (change)='onTempChange(myTempSelect.value)'>
+              <option class="dropdown-item" href="#">All Data</option>
+              <option class="dropdown-item" href="#">Last Month</option>
+              <option class="dropdown-item" href="#">Last Week</option>
+              <option class="dropdown-item" href="#">Today</option>
+            </select>
+          </div>
         </div>
         <div class="card-body">
           <div class="chart-area">
@@ -100,15 +110,15 @@
                         (chartClick)="chartClicked($event)"></canvas>
           </div>
         </div>
-        <div class="card-footer">
+        <!-- <div class="card-footer">
           <div class="stats">
             <i class="now-ui-icons ui-2_time-alarm"></i> Last 7 days
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-md-6">
       <div class="card  card-tasks">
         <div class="card-header ">
@@ -289,5 +299,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
