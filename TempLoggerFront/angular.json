@@ -26,8 +26,8 @@
               "node_modules/ngx-toastr/toastr.css",
               "src/assets/scss/now-ui-dashboard.scss",
               "src/assets/demo/demo.css",
-              "src/app/login/login.component.css",
-              "src/app/register/register.component.css"
+              "src/app/login/login.component.css"
+              
             ],
             "scripts": [
               "node_modules/chart.js/dist/Chart.min.js"
