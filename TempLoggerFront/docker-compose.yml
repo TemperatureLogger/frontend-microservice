@@ -11,5 +11,8 @@ services:
       - ./:/usr/src/app
     command: ["npm", "run", "start"]
     networks:
-      cluster
-        - external: true
+      - cluster
+
+networks:
+  cluster:
+    external: true
