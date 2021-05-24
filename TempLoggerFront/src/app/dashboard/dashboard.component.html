@@ -14,18 +14,17 @@
     <div class="col-lg-4">
       <div class="card card-chart">
         <div class="card-header">
-          <h5 class="card-category">Sensor Metrics</h5>
+          <h5 class="card-category">Temp Sensor Metrics</h5>
           <h4 class="card-title">Temperature</h4>
           <div ngbDropdown>
-            <button type="button" class="btn btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret" ngbDropdownToggle>
-              <i class="now-ui-icons loader_gear"></i>
-            </button>
-            <div ngbDropdownMenu class="dropdown-menu-right">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-              <a class="dropdown-item text-danger" href="#">Remove Data</a>
-            </div>
+            <select id="temp-dropdown"
+              #myTempSelect
+              (change)='onTempChange(myTempSelect.value)'>
+              <option class="dropdown-item" href="#">All Data</option>
+              <option class="dropdown-item" href="#">Last Month</option>
+              <option class="dropdown-item" href="#">Last Week</option>
+              <option class="dropdown-item" href="#">Today</option>
+            </select>
           </div>
         </div>
         <div class="card-body">
@@ -40,28 +39,27 @@
                         (chartClick)="chartClicked($event)"></canvas>
           </div>
         </div>
-        <div class="card-footer">
+        <!-- <div class="card-footer">
           <div class="stats">
             <i class="now-ui-icons arrows-1_refresh-69"></i> Just Updated
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="col-lg-4 col-md-6">
       <div class="card card-chart">
         <div class="card-header">
-          <h5 class="card-category">Sensor Metrics</h5>
+          <h5 class="card-category">Humidity Sensor Metrics</h5>
           <h4 class="card-title">Humidity</h4>
           <div ngbDropdown>
-            <button type="button" class="btn btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret" ngbDropdownToggle>
-              <i class="now-ui-icons loader_gear"></i>
-            </button>
-            <div ngbDropdownMenu class="dropdown-menu-right">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-              <a class="dropdown-item text-danger" href="#">Remove Data</a>
-            </div>
+            <select id="hum-dropdown"
+              #myHumSelect
+              (change)='onHumChange(myHumSelect.value)'>
+              <option class="dropdown-item" href="#">All Data</option>
+              <option class="dropdown-item" href="#">Last Month</option>
+              <option class="dropdown-item" href="#">Last Week</option>
+              <option class="dropdown-item" href="#">Today</option>
+            </select>
           </div>
         </div>
         <div class="card-body">
@@ -77,11 +75,11 @@
                         (chartClick)="chartClicked($event)"></canvas>
           </div>
         </div>
-        <div class="card-footer">
+        <!-- <div class="card-footer">
           <div class="stats">
             <i class="now-ui-icons arrows-1_refresh-69"></i> Just Updated
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="col-lg-4 col-md-6">
@@ -89,6 +87,16 @@
         <div class="card-header">
           <h5 class="card-category">Statistics</h5>
           <h4 class="card-title">Timestamps</h4>
+          <div ngbDropdown>
+            <select id="temp-dropdown"
+              #myTempSelect
+              (change)='onTempChange(myTempSelect.value)'>
+              <option class="dropdown-item" href="#">All Data</option>
+              <option class="dropdown-item" href="#">Last Month</option>
+              <option class="dropdown-item" href="#">Last Week</option>
+              <option class="dropdown-item" href="#">Today</option>
+            </select>
+          </div>
         </div>
         <div class="card-body">
           <div class="chart-area">
@@ -102,15 +110,15 @@
                         (chartClick)="chartClicked($event)"></canvas>
           </div>
         </div>
-        <div class="card-footer">
+        <!-- <div class="card-footer">
           <div class="stats">
             <i class="now-ui-icons ui-2_time-alarm"></i> Last 7 days
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-md-6">
       <div class="card  card-tasks">
         <div class="card-header ">
@@ -291,5 +299,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>

@@ -1,0 +1,52 @@
+<style>
+    .central {
+        margin: 0;
+        position: absolute;
+        top: 40%;
+        left: 45%;
+    }
+    
+    input {
+      margin: 2.5%;
+    }
+    
+    button {
+      left: 50%;
+    }
+    </style>
+    
+    <html>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <div class="page">
+        <div class = "central">
+          <form #f="ngForm" method="post" ngNativeValidate>
+            <div class="row d-flex justify-content-center align-items-center">
+                  <div class="form-group">
+                    <label for="uname"><b>Username </b></label>
+                    <br>
+                    <input type="text" placeholder="Enter Username" id="nameText" required>
+                    <br>
+                    <label for="psw"><b>Password </b></label>
+                    <br>
+                    <input type="password" placeholder="Enter Password" id="passText" required>
+                    <br>
+                    <label for="psw"><b> Confirm Password </b></label>
+                    <br>
+                    <input type="password" placeholder="Confirm Password" id="confirmPassText" required>
+                    <br>                    
+                    <br>
+                    <button type="submit" class="btn btn-primary" id="register_btn"
+                    #registerBtn
+                    (click)='registerUser()'>Register</button>
+                    <button type="submit" class="btn btn-primary" id="login_btn" style="margin-left: 30%;"
+                    #loginBtn
+                    (click)='redirectLogin()'>Login</button>
+       
+                    <br>
+                  </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </html> 
+    

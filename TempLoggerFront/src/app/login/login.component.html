@@ -1,0 +1,30 @@
+
+<form #f="ngForm" method="post" ngNativeValidate>
+
+<div class="container" id="container">
+	<div class="form-container sign-in-container">
+		<form action="#">
+			<h1>Sign in</h1>
+			<span>Use your account</span>
+			<input type="text" placeholder="Email" id="nameText" required />
+			<input type="password"  placeholder="Password" id="passText" required/>
+			<button (click)='loginUser()'>Sign In</button>
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>Welcome Back!</h1>
+				<p>To keep connected with us please login with your personal info</p>
+				<button class="ghost" id="signIn">Sign In</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>New here? Join us!</h1>
+				<p>Enter your personal details and start journey with us</p>
+				<button (click)='redirectRegister()' class="ghost" id="signUp">Sign Up!!</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+</form>
