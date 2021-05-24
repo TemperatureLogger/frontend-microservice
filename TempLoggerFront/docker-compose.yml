@@ -2,18 +2,14 @@ version: "3.7"
 
 services:
   frontend-service:
+    container_name: frontend
+    hostname: frontend
     build: './'
     ports:
-      - "4200:80"
-    # environment:
-    #   NODE_ENV: development
-    #   PGHOST: db
-    #   PGUSER: ${PGUSER}
-    #   PGPASSWORD: ${PGPASSWORD}
-    #   PGPORT: 5432
-    #   PGDATABASE: ${PGDATABASE}
+      - "4401:80"
     volumes:
       - ./:/usr/src/app
     command: ["npm", "run", "start"]
-    # networks:
-      # - measurements_network
+    networks:
+      cluster
+        - external: true
