@@ -4,6 +4,8 @@ import { browser } from 'protractor';
 import { Router } from '@angular/router';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import userDB from '../users.json';
+/* Import api to registrer users */
+import { ApiUsers } from '../api.users';
 
 @Component({
   templateUrl: './login.component.html',
@@ -14,16 +16,28 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   returnUrl: string;
 
-  constructor(private router:Router) {}
+  /* Create variable to reffer API */
+  constructor(private router:Router, private api: ApiUsers) {}
 
   ngOnInit(): void {
   }
 
+  loginUserApiWrapper() {
+    /* Make API call */
+    this.api.loginUser()
+    .subscribe(data => {
+      for (const entry of data as []) {
+        console.log(entry);
+      }
+    });
+  }
 
   loginUser() :void {
     let nameText = (<HTMLInputElement>document.getElementById('nameText')).value;
     let passText = (<HTMLInputElement>document.getElementById('passText')).value;
     let exists = false;
+
+    this.loginUserApiWrapper();
     // TODO: Replace the userDB with a get from the DB
     // GET from database
     for (let i = 0; i < userDB.length; i++) {
