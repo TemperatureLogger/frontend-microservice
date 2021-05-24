@@ -21,10 +21,11 @@ export class LoginComponent implements OnInit {
 
 
   loginUser() :void {
-    let nameText = (<HTMLInputElement>document.getElementById('nameText')).value;//document.getElementById('nameText').value;
-    let passText = (<HTMLInputElement>document.getElementById('passText')).value;//document.getElementById('passText').value;
+    let nameText = (<HTMLInputElement>document.getElementById('nameText')).value;
+    let passText = (<HTMLInputElement>document.getElementById('passText')).value;
     let exists = false;
     // TODO: Replace the userDB with a get from the DB
+    // GET from database
     for (let i = 0; i < userDB.length; i++) {
       let user = userDB[i]
       console.log(user.name)
