@@ -17,11 +17,16 @@ export class RegisterComponent implements OnInit {
   }
 
   registerUser(): void {
-    let nameText = (<HTMLInputElement>document.getElementById('nameText')).value;//document.getElementById('nameText').value;
-    let passText = (<HTMLInputElement>document.getElementById('passText')).value;//document.getElementById('passText').value;
+    let nameText = (<HTMLInputElement>document.getElementById('nameText')).value;
+    let passText = (<HTMLInputElement>document.getElementById('passText')).value;
     let confirmPassText =  (<HTMLInputElement>document.getElementById('confirmPassText')).value;
+    let serialIDText = (<HTMLInputElement>document.getElementById('serialIdText')).value;
     // TODO Change userDB with get call from user DB
-    if (nameText != null 
+
+    //First check if the serial number is valid. (this will be changed with searching it in the database)
+    if(serialIDText == "") {
+      window.alert("Please enter a valid serial ID number!");
+    } else if (nameText != "" 
         && passText === confirmPassText
         && passText.length) {
           for (let i = 0; i < userDB.length; i++) {
@@ -34,6 +39,10 @@ export class RegisterComponent implements OnInit {
           // TODO Change push with 
           userDB.push({"name": nameText, "pass": passText});
           window.alert("User registered with success."); 
+      }
+      else {
+        // Temporary message
+        window.alert("Username can't be empty and passwords must match!"); 
       }
       
   }
