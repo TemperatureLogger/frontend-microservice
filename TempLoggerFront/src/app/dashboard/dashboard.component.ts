@@ -3,10 +3,12 @@ import * as Chartist from 'chartist';
 import * as $ from "jquery";
 // Import API that communicates with database
 import { ApiService } from '../api.service';
-
-// Import the prototype for environmental data
+// Import interface to model data from the API
 import { EnvironmentData } from '../../environmentData';
-//import { timeStamp } from 'console';
+
+var MONTHLY_CAP = 16;
+var WEEKLY_CAP = 10;
+var DAILY_CAP = 5;
 
 @Component({
   selector: 'app-dashboard',
@@ -71,21 +73,48 @@ export class DashboardComponent implements OnInit {
   constructor(private api: ApiService) {}
 
   /* Create storage for the responce of GET requests */
-  temperature: number[] = [];
-  humidity: number[] = [];
-  temperatures: number[] = [38.71, 26.5, 1.45, 3.76, 41.3, 17.42, 14.77, 21.85, 29.06, 27.84, 35.95, 29.11, 24.74, 47.06, 6.17, 21.03, 36.69, 38.71, 8.48, 7.78];
-  humidities: number[] = [95.58, 69.98, 87.62, 29.8, 87.83, 36.84, 84.86, 82.74, 58.31, 40.0, 52.11, 89.08, 35.1, 59.02, 80.34, 97.4, 58.9, 20.87, 88.44, 95.28];  
-  timestamps : number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 , 20, 21]
-  tstamps : number[] = this.timestamps;
-  humTstamps : number[] = this.timestamps;
+  /* Variables to stor the results of API calls */
+  serialNumbers1: number[] = [];
+  temperatures1: number[] = [];
+  humidities1: number[] = [];
+  timestamps1: number[] = [];
+
   /* Define method to get data from the database via the API */
   getAllData() {
+    /* Reset entries */
+    this.timestamps1 = [];
+    this.temperatures1 = [];
+    this.humidities1 = [];
+    this.serialNumbers1 = [];
+
+    /* Make API call */
     this.api.getAllData()
     .subscribe(data => {
       for (const entry of (data as EnvironmentData[])) {
-        // console.log(entry.id);
-        this.temperature.push(entry.temperature);
-        this.humidity.push(entry.humidity);
+        this.timestamps1.push(entry.time);
+        this.temperatures1.push(entry.temperature);
+        this.humidities1.push(entry.humidity);
+        this.serialNumbers1.push(entry.serialNumber);
+      }
+    });
+  }
+
+  /* Define method to get data from the database via the API */
+  getEntries(N) {
+    /* Reset entries */
+    this.timestamps1 = [];
+    this.temperatures1 = [];
+    this.humidities1 = [];
+    this.serialNumbers1 = [];
+
+    /* Make API call */
+    this.api.getEntries(N)
+    .subscribe(data => {
+      for (const entry of (data as EnvironmentData[])) {
+        this.timestamps1.push(entry.time);
+        this.temperatures1.push(entry.temperature);
+        this.humidities1.push(entry.humidity);
+        this.serialNumbers1.push(entry.serialNumber);
       }
     });
   }
@@ -95,9 +124,8 @@ export class DashboardComponent implements OnInit {
     this.api.getLocalData()
       .subscribe(data => {
         for (const entry of (data as EnvironmentData[])) {
-          // console.log(entry.id);
-          this.temperature.push(entry.temperature);
-          this.humidity.push(entry.humidity);
+          this.temperatures1.push(entry.temperature);
+          this.humidities1.push(entry.humidity);
         }
       });
   }
@@ -157,7 +185,7 @@ export class DashboardComponent implements OnInit {
   }
 
   /* Load the template from the bar graph */
-  ngLoad_Graph() {
+  ngLoadTimestampGraph(dataOy) {
   /* Third graph. */
       /* TODO: decide which data gets represented here */
       this.canvas = document.getElementById("barChartSimpleGradientsNumbers");
@@ -177,7 +205,7 @@ export class DashboardComponent implements OnInit {
             pointRadius: 4,
             fill: true,
             borderWidth: 1,
-            data: [80, 99, 86, 96, 123, 85, 100, 75, 88, 90, 123, 155]
+            data: dataOy//[80, 99, 86, 96, 123, 85, 100, 75, 88, 90, 123, 155]
           }
         ];
       this.lineChartGradientsNumbersColors = [
@@ -472,81 +500,114 @@ export class DashboardComponent implements OnInit {
     this.lineBigDashboardChartType = 'line';
   }
 
-  displayMonth() {
-    let n = this.temperatures.length;
-    this.temperatures = this.temperatures.slice(n - 10, n);
-    this.timestamps = this.timestamps.slice(n - 10, n);
-  }
+  // /* NOTE: REFACTO THIS BS CODE */
+  // displayMonth() {
+  //   let n = this.temperatures.length;
+  //   this.temperatures = this.temperatures.slice(n - 10, n);
+  //   this.timestamps = this.timestamps.slice(n - 10, n);
+  // }
 
   onTempChange(value:string) {
-    let n = this.temperatures.length;
-    let m = this.timestamps.length;
-    if (value == "Last Month") {
-      this.temperature = this.temperatures.slice(n - 10, n);
-      this.tstamps = this.timestamps.slice(m - 10, m);
-      this.ngLoadTempGraph(this.tstamps, this.temperature);
-    } else if (value == "Last Week") {
-      this.temperature = this.temperatures.slice(n - 4, n);
-      this.tstamps = this.timestamps.slice(m - 4, m);
-      this.ngLoadTempGraph(this.tstamps, this.temperature);
-    } else if (value == "Today") {
-      this.temperature = this.temperatures.slice(n - 2, n);
-      this.tstamps = this.timestamps.slice(m - 2, m);
-      this.ngLoadTempGraph(this.tstamps, this.temperature);
-    } 
-    else {
-      this.temperature = this.temperatures;
-      this.tstamps = this.timestamps;
-      this.ngLoadTempGraph(this.tstamps, this.temperature);
-    }
+    /* Initialize default entries and reset temperature and timestamps */
+    var N = 0;
+    var graph_temperatures = [];
+    var temperature_timestamps = [];
+
+    /* COmpute how many entries required */
+    if (value == "Last Month")
+      N = MONTHLY_CAP;
+    if (value == "Last Week")
+      N = WEEKLY_CAP;
+    if (value == "Today")
+      N = DAILY_CAP;
+    
+    /* Make API call */
+    if (N != 0)
+      this.getEntries(N);
+    else
+      this.getAllData();
+
+    /* Store data in local variables */
+    graph_temperatures = this.temperatures1;
+    temperature_timestamps = this.timestamps1;
+
+    /* Redraw graph */
+    this.ngLoadTempGraph(graph_temperatures, temperature_timestamps);
+
   }
 
   onHumChange(value:string) {
-    let n = this.humidities.length;
-    let m = this.timestamps.length;
-    if (value == "Last Month") {
-      this.humidity = this.humidities.slice(n - 10, n);
-      this.humTstamps = this.timestamps.slice(m - 10, m);
-      this.ngLoadHumGraph(this.humTstamps, this.humidity);
-    } else if (value == "Last Week") {
-      this.humidity = this.humidities.slice(n - 4, n);
-      this.humTstamps = this.timestamps.slice(m - 4, m);
-      this.ngLoadHumGraph(this.humTstamps, this.humidity);
-    } else if (value == "Today") {
-      this.humidity = this.humidities.slice(n - 2, n);
-      this.humTstamps = this.timestamps.slice(m - 2, m);
-      this.ngLoadHumGraph(this.humTstamps, this.humidity);
-    } 
-    else {
-      this.humidity = this.humidities;
-      this.humTstamps = this.timestamps;
-      this.ngLoadHumGraph(this.humTstamps, this.humidity);
-  }}
+      /* Initialize default entries and reset temperature and timestamps */
+      var N = 0;
+      var graph_humidity = [];
+      var humidity_timestamps = [];
+
+      /* COmpute how many entries required */
+      if (value == "Last Month")
+        N = MONTHLY_CAP;
+      if (value == "Last Week")
+        N = WEEKLY_CAP;
+      if (value == "Today")
+        N = DAILY_CAP;
+      
+      /* Make API call */
+      if (N != 0)
+        this.getEntries(N);
+      else
+        this.getAllData();
+  
+      /* Store data in local variables */
+      graph_humidity = this.humidities1;
+      humidity_timestamps = this.timestamps1;
+
+      /* Redraw graph */
+      this.ngLoadHumGraph(humidity_timestamps, graph_humidity);
+  }
 
   ngOnInit() {
+    /* Initialize variables */
+    /* Variables to draw dashboard graph */
+    var dashboard_temperatures = [];
+    var dashboard_humidities = [];
 
-    /* Try get data for the dashboard table */
-    this.temperature = this.temperatures
-    console.log("Getting data...");
-    this.getLocalData();
-    // this.getAllData();
-    console.log("Got data.");
+    /* Variables to draw temperature graph */
+    var graph_temperatures = [];
+    var temperature_timestamps = [];
+
+    /* Variables to draw humidity graph */
+    var graph_humidity = [];
+    var humidity_timestamps = [];
+
+
+    /* Try get data fot the initial tables */
+    this.getAllData();
+
+    /* Save the dashboard data */
+    dashboard_temperatures = this.temperatures1;
+    dashboard_humidities = this.humidities1;
+
+    /* Save the temperature graph data */
+    graph_temperatures = this.temperatures1;
+    temperature_timestamps = this.timestamps1;
+
+    /* Save the hunidity graph data */
+    graph_humidity = this.humidities1;
+    humidity_timestamps = this.timestamps1;
 
     /* Set generic graph options */
     this.ngSetGenericGraphOptions();
 
     /* Load dashboard graph */
-    this.ngLoadDashboardGraph(this.temperature, this.humidity);
+    this.ngLoadDashboardGraph(dashboard_temperatures, dashboard_humidities);
 
     /*Load temperature (left) graph */
-    this.ngLoadTempGraph(this.tstamps, this.temperature);
+    this.ngLoadTempGraph(graph_temperatures, temperature_timestamps);
 
     /* Load Humidity (middle) graph */
-    this.ngLoadHumGraph(this.humTstamps, this.humidities);
+    this.ngLoadHumGraph(humidity_timestamps, graph_humidity);
 
-    /* Load left graph */
-    this.ngLoad_Graph();
+    /* Load right graph */
+    this.ngLoadTimestampGraph([80, 99, 86, 96, 123, 85, 100, 75, 88, 90, 123, 155]);
   }
-  
 
 }
