@@ -8,8 +8,10 @@ localhost:3001/api/token/authorize
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-const loginServiceUrl = 'http://157.245.65.94:3001/api';
-
+const loginServiceUrl = 'http://localhost:3001/api/users/login';
+const registerServiceUrl = 'http://localhost:3001/api/users';
+const refreshTokenUrl = 'http://localhost:3001/api/token/refresh';
+const authorizeTokenUrl = 'http://localhost:3001/api/token/authorize';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +21,25 @@ export class ApiUsers {
     constructor(private http: HttpClient) { }
 
     /* */
-    loginUser() {
-        console.log("GOT HEREEE!\n");
-        return this.http.get(loginServiceUrl + "/users/login");
+    loginUser(username, passwd) {
+        const headers = { "username":username, "password":passwd};
+        const body = { title: 'Knock Knock' };
+
+        return this.http.post<any>(loginServiceUrl, body, { headers }).subscribe(data => {
+            console.log(data);
+        });
+    }
+
+    /* */
+    registerUser(username, passwd, serial) {
+        const headers = { "username":username, "password":passwd, "serialNumber":serial};
+        const body = { title: 'Knock Knock' };
+
+        console.log("!!!!!!!!!!!!!!!!!!!!!\n");
+
+        return this.http.post<any>(registerServiceUrl, body, { headers }).subscribe(data => {
+            console.log(data);
+        });
     }
 
     /* */

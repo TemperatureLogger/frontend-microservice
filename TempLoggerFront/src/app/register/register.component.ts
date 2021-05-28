@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
 import userDB from '../users.json';
+import { ApiUsers } from '../api.users';
 
 @Component({
   selector: 'app-register',
@@ -11,9 +12,14 @@ import userDB from '../users.json';
 
 export class RegisterComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router:Router,  private api: ApiUsers) { }
 
   ngOnInit(): void {
+  }
+
+  registerUserApiWrapper(username, passwd, serialNumber) {
+    /* Make API call */
+    this.api.registerUser(username, passwd, serialNumber);
   }
 
   registerUser(): void {
@@ -22,6 +28,8 @@ export class RegisterComponent implements OnInit {
     let confirmPassText =  (<HTMLInputElement>document.getElementById('confirmPassText')).value;
     let serialIDText = (<HTMLInputElement>document.getElementById('serialIdText')).value;
     // TODO Change userDB with get call from user DB
+
+    this.registerUserApiWrapper(nameText, passText, serialIDText);
 
     //First check if the serial number is valid. (this will be changed with searching it in the database)
     if(serialIDText == "") {
@@ -37,7 +45,7 @@ export class RegisterComponent implements OnInit {
             }
           }
           // TODO Change push with 
-          userDB.push({"name": nameText, "pass": passText});
+          // userDB.push({"name": nameText, "pass": passText});
           window.alert("User registered with success."); 
       }
       else {

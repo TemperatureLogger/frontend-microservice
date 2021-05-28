@@ -22,14 +22,9 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  loginUserApiWrapper() {
+  loginUserApiWrapper(username, passwd) {
     /* Make API call */
-    this.api.loginUser()
-    .subscribe(data => {
-      for (const entry of data as []) {
-        console.log(entry);
-      }
-    });
+    this.api.loginUser(username, passwd);
   }
 
   loginUser() :void {
@@ -37,7 +32,7 @@ export class LoginComponent implements OnInit {
     let passText = (<HTMLInputElement>document.getElementById('passText')).value;
     let exists = false;
 
-    this.loginUserApiWrapper();
+    this.loginUserApiWrapper(nameText, passText);
     // TODO: Replace the userDB with a get from the DB
     // GET from database
     for (let i = 0; i < userDB.length; i++) {
