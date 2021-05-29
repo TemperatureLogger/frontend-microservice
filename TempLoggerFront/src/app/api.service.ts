@@ -14,11 +14,13 @@ export class ApiService {
 
   /* Get add data from the database */
   getAllData() {
-    return this.http.get(dataBaseUrl);
+    const headers = { "autorization":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJzZXJpYWxOdW1iZXIiOiI1NTMxMjMiLCJpYXQiOjE2MjIyODUwNTIsImV4cCI6MTYyMjI4ODY1MiwiYXVkIjoiVXNlcnMiLCJpc3MiOiJUZW1wTG9nZ2VyIiwic3ViIjoiQXV0aCBUb2tlbiJ9.BHrsTB9ir9YXDR_2sOVriRTCThF_31bpgEYcPkpK7vU"};
+    return this.http.get(dataBaseUrl, {headers});
   }
 
   getEntries(N) {
-    return this.http.get(dataBaseUrl + "/period/" + N);
+    const headers = { "autorization":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJzZXJpYWxOdW1iZXIiOiI1NTMxMjMiLCJpYXQiOjE2MjIyODUwNTIsImV4cCI6MTYyMjI4ODY1MiwiYXVkIjoiVXNlcnMiLCJpc3MiOiJUZW1wTG9nZ2VyIiwic3ViIjoiQXV0aCBUb2tlbiJ9.BHrsTB9ir9YXDR_2sOVriRTCThF_31bpgEYcPkpK7vU"};
+    return this.http.get(dataBaseUrl + "/period/" + N, {headers});
   }
 
   /* Get local data */
