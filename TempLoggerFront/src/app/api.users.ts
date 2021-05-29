@@ -32,12 +32,9 @@ export class ApiUsers {
 
     /* */
     registerUser(username, passwd, serial) {
-        const headers = { "username":username, "password":passwd, "serialNumber":serial};
-        const body = { title: 'Knock Knock' };
+        const body = { "username":username, "password":passwd, "serialNumber":serial};
 
-        console.log("!!!!!!!!!!!!!!!!!!!!!\n");
-
-        return this.http.post<any>(registerServiceUrl, body, { headers }).subscribe(data => {
+        return this.http.post<any>(registerServiceUrl, body).subscribe(data => {
             console.log(data);
         });
     }
