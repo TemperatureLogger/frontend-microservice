@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
     this.api.loginUser(nameText, passText).subscribe({
       next: data => {
         this.api.set_bearer_token(data.token);
+      console.log("Login token:" + this.api.get_bearer_token());
         this.redirectDashboard();
       },
       error: error => {

@@ -90,6 +90,8 @@ export class DashboardComponent implements OnInit {
     this.humidities1 = [];
     this.serialNumbers1 = [];
 
+    console.log("Dashboard token:" + this.api_users.get_bearer_token());
+
     /* Make API call */
     this.api.getAllData(this.api_users.get_bearer_token())
     .subscribe(data => {
