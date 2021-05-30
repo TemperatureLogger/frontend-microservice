@@ -5,6 +5,9 @@ import * as $ from "jquery";
 import { ApiService } from '../api.service';
 // Import interface to model data from the API
 import { EnvironmentData } from '../../environmentData';
+// Import API that communicates with auth service
+import { ApiUsers } from '../api.users';
+
 
 var MONTHLY_CAP = 16;
 var WEEKLY_CAP = 10;
@@ -70,7 +73,7 @@ export class DashboardComponent implements OnInit {
   }
 
   /* Create variable to reffer API */
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private api_users: ApiUsers) {}
 
   /* Create storage for the responce of GET requests */
   /* Variables to stor the results of API calls */
@@ -88,7 +91,7 @@ export class DashboardComponent implements OnInit {
     this.serialNumbers1 = [];
 
     /* Make API call */
-    this.api.getAllData()
+    this.api.getAllData(this.api_users.get_bearer_token())
     .subscribe(data => {
       for (const entry of (data as EnvironmentData[])) {
         this.timestamps1.push(entry.time);
@@ -108,7 +111,7 @@ export class DashboardComponent implements OnInit {
     this.serialNumbers1 = [];
 
     /* Make API call */
-    this.api.getEntries(N)
+    this.api.getEntries(N, this.api_users.get_bearer_token())
     .subscribe(data => {
       for (const entry of (data as EnvironmentData[])) {
         this.timestamps1.push(entry.time);

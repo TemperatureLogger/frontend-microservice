@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
-import userDB from '../users.json';
 import { ApiUsers } from '../api.users';
 
 @Component({
@@ -17,46 +16,41 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  redirectLogin(): void {
+    this.router.navigate(['/login']);
+  }
+
   registerUserApiWrapper(username, passwd, serialNumber) {
     /* Make API call */
     this.api.registerUser(username, passwd, serialNumber);
   }
 
-  registerUser(): void {
+  registerUser() {
+    /* Get data from textboxes */
     let nameText = (<HTMLInputElement>document.getElementById('nameText')).value;
     let passText = (<HTMLInputElement>document.getElementById('passText')).value;
     let confirmPassText =  (<HTMLInputElement>document.getElementById('confirmPassText')).value;
     let serialIDText = (<HTMLInputElement>document.getElementById('serialIdText')).value;
-    // TODO Change userDB with get call from user DB
 
-    this.registerUserApiWrapper(nameText, passText, serialIDText);
+    /* Check passwords to match */
+    if (confirmPassText != passText) {
+      window.alert("Password missmatch!");
+      return;
+    }
 
-    //First check if the serial number is valid. (this will be changed with searching it in the database)
-    if(serialIDText == "") {
-      window.alert("Please enter a valid serial ID number!");
-    } else if (nameText != "" 
-        && passText === confirmPassText
-        && passText.length) {
-          for (let i = 0; i < userDB.length; i++) {
-            let user = userDB[i];
-            if (user["name"] === nameText) {
-              window.alert("User already registered.")
-              return;
-            }
-          }
-          // TODO Change push with 
-          // userDB.push({"name": nameText, "pass": passText});
-          window.alert("User registered with success."); 
+    /* Call the register service */
+    this.api.registerUser(nameText, passText, serialIDText).subscribe({
+      next: data => {
+
+        this.api.set_bearer_token(data.token);
+        window.alert("User Registered Succesfully! Enjoy your service!");
+        this.redirectLogin();
+      },
+      error: error => {
+          console.error('There was an error!', error);
+        window.alert("Bad serial ID \\ User already exists!");
       }
-      else {
-        // Temporary message
-        window.alert("Username can't be empty and passwords must match!"); 
-      }
-      
+    });
+    
   }
-
-  redirectLogin(): void {
-    this.router.navigate(['/login']);
-  }
-
 }
