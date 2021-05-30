@@ -22,9 +22,12 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  loginUserApiWrapper(username, passwd) {
-    /* Make API call */
-    this.api.loginUser(username, passwd);
+  redirectRegister() :void {
+    this.router.navigate(['/register']);
+  }
+
+  redirectDashboard() :void {
+    this.router.navigate(['/dashboard']);
   }
 
   loginUser() :void {
@@ -32,31 +35,15 @@ export class LoginComponent implements OnInit {
     let passText = (<HTMLInputElement>document.getElementById('passText')).value;
     let exists = false;
 
-    this.loginUserApiWrapper(nameText, passText);
-    // TODO: Replace the userDB with a get from the DB
-    // GET from database
-    for (let i = 0; i < userDB.length; i++) {
-      let user = userDB[i]
-      console.log(user.name)
-      if (nameText == user.name) {
-        if (passText == user.pass) {
-          exists = true;
-          this.router.navigate(['/dashboard']);
-          break;
-        }
-        else {
-          window.alert("Wrong credentials");
-          break;
-        }
+    /* Call the register service */
+    this.api.loginUser(nameText, passText).subscribe({
+      next: data => {
+        this.api.set_bearer_token(data.token);
+        this.redirectDashboard();
+      },
+      error: error => {
+        window.alert("Invalid Credidentials!");
       }
-    }
-    
-    if (exists == false)
-      window.alert("User doesn't exist")
-
-  }
-
-  redirectRegister() :void {
-    this.router.navigate(['/register']);
+    });
   }
 }

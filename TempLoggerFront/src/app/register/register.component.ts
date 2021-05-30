@@ -47,10 +47,8 @@ export class RegisterComponent implements OnInit {
         this.redirectLogin();
       },
       error: error => {
-          console.error('There was an error!', error);
         window.alert("Bad serial ID \\ User already exists!");
       }
     });
-    
   }
 }
