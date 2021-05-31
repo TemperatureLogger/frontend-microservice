@@ -6,6 +6,9 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 import userDB from '../users.json';
 /* Import api to registrer users */
 import { ApiUsers } from '../api.users';
+// Import interface to model data from the API
+import { UserData } from '../userData';
+
 
 @Component({
   templateUrl: './login.component.html',
@@ -13,8 +16,17 @@ import { ApiUsers } from '../api.users';
 
 export class LoginComponent implements OnInit {
 
+  
   form: FormGroup;
   returnUrl: string;
+  static user_name: string;
+  static user_serial : any;
+
+  // private user_name : string;
+
+  // getUserName() {
+  //   return this.user_name;
+  // }
 
   /* Create variable to reffer API */
   constructor(private router:Router, private api: ApiUsers) {}
@@ -22,14 +34,15 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  loginUserApiWrapper() {
-    /* Make API call */
-    this.api.loginUser()
-    .subscribe(data => {
-      for (const entry of data as []) {
-        console.log(entry);
-      }
-    });
+  redirectRegister() :void {
+    this.router.navigate(['/register']);
+  }
+
+  redirectDashboard() :void {
+    this.router.navigate(['/dashboard']);
+  }
+
+  getUserSerialWrapper() {
   }
 
   loginUser() :void {
@@ -37,31 +50,25 @@ export class LoginComponent implements OnInit {
     let passText = (<HTMLInputElement>document.getElementById('passText')).value;
     let exists = false;
 
-    this.loginUserApiWrapper();
-    // TODO: Replace the userDB with a get from the DB
-    // GET from database
-    for (let i = 0; i < userDB.length; i++) {
-      let user = userDB[i]
-      console.log(user.name)
-      if (nameText == user.name) {
-        if (passText == user.pass) {
-          exists = true;
-          this.router.navigate(['/dashboard']);
-          break;
-        }
-        else {
-          window.alert("Wrong credentials");
-          break;
-        }
+    /* Call the register service */
+    this.api.loginUser(nameText, passText).subscribe({
+      next: data => {
+        this.api.set_bearer_token(data.token);
+
+
+        this.api.getUserSerial(this.api.get_bearer_token()).subscribe(data => {
+          var entry = data as UserData;
+          // console.log(entry);
+          // console.log(String(entry.serialNumber));
+          localStorage.setItem('serial', String(entry.serialNumber));
+        });
+
+      console.log("Login token:" + this.api.get_bearer_token());
+        this.redirectDashboard();
+      },
+      error: error => {
+        window.alert("Invalid Credentials!");
       }
-    }
-    
-    if (exists == false)
-      window.alert("User doesn't exist")
-
-  }
-
-  redirectRegister() :void {
-    this.router.navigate(['/register']);
+    });
   }
 }

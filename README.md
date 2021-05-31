@@ -9,7 +9,5 @@ Run project
 -
 
 cd TempLoggerFront
-
 npm install
-
 ./start_front.sh
