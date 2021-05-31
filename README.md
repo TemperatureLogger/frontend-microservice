@@ -12,4 +12,4 @@ cd TempLoggerFront
 
 npm install
 
-ng serve
+./start_front.sh
