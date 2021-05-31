@@ -7,7 +7,8 @@ import { ApiService } from '../api.service';
 import { EnvironmentData } from '../../environmentData';
 // Import API that communicates with auth service
 import { ApiUsers } from '../api.users';
-
+import { LoginComponent } from '../login/login.component';
+import { Router } from '@angular/router';
 
 var MONTHLY_CAP = 16;
 var WEEKLY_CAP = 10;
@@ -73,7 +74,7 @@ export class DashboardComponent implements OnInit {
   }
 
   /* Create variable to reffer API */
-  constructor(private api: ApiService, private api_users: ApiUsers) {}
+  constructor(private router:Router, private api: ApiService, private api_users: ApiUsers) {}
 
   /* Create storage for the responce of GET requests */
   /* Variables to stor the results of API calls */
@@ -90,7 +91,7 @@ export class DashboardComponent implements OnInit {
     this.humidities1 = [];
     this.serialNumbers1 = [];
 
-    console.log("Dashboard token:" + this.api_users.get_bearer_token());
+    // console.log("Dashboard token:" + this.api_users.get_bearer_token());
 
     /* Make API call */
     this.api.getAllData(this.api_users.get_bearer_token())
@@ -190,7 +191,7 @@ export class DashboardComponent implements OnInit {
   }
 
   /* Load the template from the bar graph */
-  ngLoadTimestampGraph(dataOy) {
+  ngLoadTimestampGraph(dataOx, dataOy) {
   /* Third graph. */
       /* TODO: decide which data gets represented here */
       this.canvas = document.getElementById("barChartSimpleGradientsNumbers");
@@ -210,7 +211,7 @@ export class DashboardComponent implements OnInit {
             pointRadius: 4,
             fill: true,
             borderWidth: 1,
-            data: dataOy//[80, 99, 86, 96, 123, 85, 100, 75, 88, 90, 123, 155]
+            data: dataOy //[80, 99, 86, 96, 123, 85, 100, 75, 88, 90, 123, 155]
           }
         ];
       this.lineChartGradientsNumbersColors = [
@@ -221,7 +222,7 @@ export class DashboardComponent implements OnInit {
         pointBackgroundColor: "#2CA8FF",
       }
     ];
-      this.lineChartGradientsNumbersLabels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      this.lineChartGradientsNumbersLabels = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
       this.lineChartGradientsNumbersOptions = {
           maintainAspectRatio: false,
           legend: {
@@ -272,6 +273,24 @@ export class DashboardComponent implements OnInit {
 
       this.lineChartGradientsNumbersType = 'bar';
   }
+
+  timeConverter(UNIX_timestamps){
+    var res = [];
+    for (const entry of (UNIX_timestamps)) {
+      var a = new Date(entry * 1000);
+      var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      var year = a.getFullYear();
+      var month = months[a.getMonth()];
+      var day = a.getDate();
+      var hour = a.getHours();
+      var min = a.getMinutes();
+      var sec = a.getSeconds();
+      var time = year + ':' + month + ':' + day + ' ' + hour + ':' + min+ ':' + sec;
+      res.push(time);
+    }
+    return res;
+  }
+  
 
   /* Load the template for the hummidity graph */
   ngLoadHumGraph(dataOx, dataOy) {
@@ -505,13 +524,6 @@ export class DashboardComponent implements OnInit {
     this.lineBigDashboardChartType = 'line';
   }
 
-  // /* NOTE: REFACTO THIS BS CODE */
-  // displayMonth() {
-  //   let n = this.temperatures.length;
-  //   this.temperatures = this.temperatures.slice(n - 10, n);
-  //   this.timestamps = this.timestamps.slice(n - 10, n);
-  // }
-
   onTempChange(value:string) {
     /* Initialize default entries and reset temperature and timestamps */
     var N = 0;
@@ -530,7 +542,8 @@ export class DashboardComponent implements OnInit {
     if (N != 0)
       this.getEntries(N);
     else
-      this.getAllData();
+      this.getEntries(100);
+
 
     /* Store data in local variables */
     graph_temperatures = this.temperatures1;
@@ -559,7 +572,7 @@ export class DashboardComponent implements OnInit {
       if (N != 0)
         this.getEntries(N);
       else
-        this.getAllData();
+        this.getEntries(100);
   
       /* Store data in local variables */
       graph_humidity = this.humidities1;
@@ -570,6 +583,10 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    /* If user not logged in,regirect to login */
+    if (String(this.api_users.get_bearer_token()) == "undefined")
+      this.router.navigate(['/login']);
+
     /* Initialize variables */
     /* Variables to draw dashboard graph */
     var dashboard_temperatures = [];
@@ -583,9 +600,9 @@ export class DashboardComponent implements OnInit {
     var graph_humidity = [];
     var humidity_timestamps = [];
 
-
     /* Try get data fot the initial tables */
-    this.getAllData();
+    // this.getAllData();
+    this.getEntries(100);
 
     /* Save the dashboard data */
     dashboard_temperatures = this.temperatures1;
@@ -612,7 +629,37 @@ export class DashboardComponent implements OnInit {
     this.ngLoadHumGraph(humidity_timestamps, graph_humidity);
 
     /* Load right graph */
-    this.ngLoadTimestampGraph([80, 99, 86, 96, 123, 85, 100, 75, 88, 90, 123, 155]);
+    console.log(this.timestamps1);
+    console.log(this.timestamps1[0]);
+    //console.log(5);
+    console.log(timeConv(this.timestamps1));
+    // timeConv(this.timestamps1)
+    this.ngLoadTimestampGraph(this.temperatures1, this.timestamps1);
+    // [80, 99, 86, 96, 123, 85, 100, 75, 88, 90, 123, 155]
   }
 
 }
+function timeConverter(unix_timestamp: number): string {
+  //throw new Error('Function not implemented.');
+    //var unix_time = parseInt(unix_timestamp);
+    console.log(unix_timestamp);
+    var a = new Date(unix_timestamp * 1000);
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var day = a.getDate();
+    var hour = a.getHours();
+    var min = a.getMinutes();
+    var sec = a.getSeconds();
+    var time = year + ':' + month + ':' + day + ' ' + hour + ':' + min+ ':' + sec;
+    return time;
+  // let unix_timestamp=1609488000
+ // time = timeConverter(unix_timestamp);
+  //console.log(time);
+}
+
+function timeConv(timestamps: number[]): string[] {
+  const arr = timestamps.map(item => { return timeConverter(item)} );
+  return arr;
+}
+

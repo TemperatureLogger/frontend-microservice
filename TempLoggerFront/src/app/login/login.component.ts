@@ -6,6 +6,9 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 import userDB from '../users.json';
 /* Import api to registrer users */
 import { ApiUsers } from '../api.users';
+// Import interface to model data from the API
+import { UserData } from '../userData';
+
 
 @Component({
   templateUrl: './login.component.html',
@@ -13,8 +16,17 @@ import { ApiUsers } from '../api.users';
 
 export class LoginComponent implements OnInit {
 
+  
   form: FormGroup;
   returnUrl: string;
+  static user_name: string;
+  static user_serial : any;
+
+  // private user_name : string;
+
+  // getUserName() {
+  //   return this.user_name;
+  // }
 
   /* Create variable to reffer API */
   constructor(private router:Router, private api: ApiUsers) {}
@@ -30,6 +42,9 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/dashboard']);
   }
 
+  getUserSerialWrapper() {
+  }
+
   loginUser() :void {
     let nameText = (<HTMLInputElement>document.getElementById('nameText')).value;
     let passText = (<HTMLInputElement>document.getElementById('passText')).value;
@@ -39,11 +54,20 @@ export class LoginComponent implements OnInit {
     this.api.loginUser(nameText, passText).subscribe({
       next: data => {
         this.api.set_bearer_token(data.token);
+
+
+        this.api.getUserSerial(this.api.get_bearer_token()).subscribe(data => {
+          var entry = data as UserData;
+          // console.log(entry);
+          // console.log(String(entry.serialNumber));
+          localStorage.setItem('serial', String(entry.serialNumber));
+        });
+
       console.log("Login token:" + this.api.get_bearer_token());
         this.redirectDashboard();
       },
       error: error => {
-        window.alert("Invalid Credidentials!");
+        window.alert("Invalid Credentials!");
       }
     });
   }

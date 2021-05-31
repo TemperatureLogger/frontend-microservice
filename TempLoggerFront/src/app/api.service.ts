@@ -13,12 +13,12 @@ export class ApiService {
 
   /* Get add data from the database */
   getAllData(bearer_token) {
-    const headers = {"Authorization":bearer_token};
+    const headers = {"Authorization":"Bearer " + String(bearer_token)};
     return this.http.get(dataBaseUrl, {headers});
   }
 
   getEntries(N, bearer_token) {
-    const headers = { "Authorization":bearer_token};
+    const headers = { "Authorization":"Bearer " + String(bearer_token)};
     return this.http.get(dataBaseUrl + "/period/" + N, {headers});
   }
 
